@@ -1,0 +1,274 @@
+/* ==========================
+   Reset y fuentes
+========================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #fff;
+    color: #222;
+    line-height: 1.6;
+}
+
+/* ==========================
+   Barra de Navegación
+========================== */
+nav {
+    background: linear-gradient(90deg, #d60000, #a80000);
+    border-bottom: 2px solid #900000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+}
+
+nav .logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+nav .logo:hover {
+    color: #ffcc00;
+}
+
+nav img {
+    height: 45px;
+    margin-left: 15px;
+    border-radius: 8px;
+}
+
+/* Lista de navegación */
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    margin-left: 25px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 6px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+nav ul li a:hover {
+    color: #333;
+    background: #ffcc00;
+}
+
+/* ==========================
+   Menú Usuario
+========================== */
+.user-menu > a {
+    font-weight: bold;
+    color: #ffcc00;
+    cursor: pointer;
+}
+
+.user-menu .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    min-width: 200px;
+    padding: 8px 0;
+    z-index: 999;
+}
+
+.user-menu .dropdown li {
+    margin: 0;
+    padding: 10px 15px;
+    color: #333;
+    font-size: 0.9rem;
+    display: block;
+}
+
+.user-menu .dropdown li a {
+    color: #d60000;
+    padding: 8px 12px;
+    display: block;
+    border-radius: 5px;
+}
+
+.user-menu .dropdown li a:hover {
+    background: #ffcc00;
+    color: #333;
+}
+
+.user-menu:hover .dropdown {
+    display: block;
+}
+
+/* ==========================
+   Tabla de Comentarios
+========================== */
+table {
+    width: 90%;
+    margin: 30px auto;
+    border-collapse: collapse;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+table thead {
+    background: #d60000;
+    color: #fff;
+    text-align: left;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+}
+
+table tbody tr:hover {
+    background: #f9f9f9;
+}
+
+.no-data {
+    text-align: center;
+    font-style: italic;
+    color: #666;
+}
+
+/* ==========================
+   Respuestas
+========================== */
+.respuestas {
+    margin-top: 10px;
+    padding: 10px;
+    background: #f8f8f8;
+    border-left: 3px solid #d60000;
+    border-radius: 5px;
+}
+
+.respuestas p {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+/* ==========================
+   Formulario de respuesta
+========================== */
+.respuesta-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.respuesta-form textarea {
+    width: 100%;
+    resize: vertical;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-family: inherit;
+}
+
+.respuesta-form button {
+    background: #d60000;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s;
+    align-self: flex-start;
+}
+
+.respuesta-form button:hover {
+    background: #a80000;
+}
+
+/* ==========================
+   Footer
+========================== */
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #b30000; /* rojo fuerte */
+    color: #fff;               /* texto blanco */
+    padding: 20px;
+    border-top: 8px solid #000; /* franja negra superior */
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.footer-column {
+    flex: 1 1 33%;
+    margin: 10px 0;
+}
+
+.footer-column p, 
+.footer-column a {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.footer a {
+    color: #fff; /* enlaces blancos dentro del footer */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #ddd; /* cambio de color al pasar el mouse */
+    text-decoration: underline;
+}
+
+.footer .social-icons {
+    margin-top: 10px;
+}
+
+.footer .social-icons a {
+    margin: 0 8px;
+    color: #fff; /* íconos blancos */
+    transition: color 0.3s;
+}
+
+.footer .social-icons a:hover {
+    color: #ddd;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-column {
+        flex: 1 1 100%;
+    }
+}

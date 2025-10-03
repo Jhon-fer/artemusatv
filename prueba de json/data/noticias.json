@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "titulo": "prueba",
+        "imagen": "uploads\/img_68c177b49a1d9.png",
+        "contenido": "aaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "video": "60wOmCQ08vY",
+        "fecha": "2025-09-10 15:05:56"
+    },
+    {
+        "id": 2,
+        "titulo": "prueba 3",
+        "imagen": "uploads\/img_68c17cc4246b0.jpg",
+        "contenido": "prueba de que funciona el segundo",
+        "video": "UNNZ8L2J9uI&list=RDUNNZ8L2J9uI&start_radio=1",
+        "fecha": "2025-09-10 15:27:32"
+    },
+    {
+        "id": 3,
+        "titulo": "prueba 2",
+        "imagen": "uploads\/img_68c1810956529.jpg",
+        "contenido": "preubea de que si sirve y que funciona bien de una vez por todas",
+        "video": "RoYV4mDiv68",
+        "fecha": "2025-09-10 15:45:45"
+    },
+    {
+        "id": 4,
+        "titulo": "Línea 73 suspende servicio por amenazas recibidas",
+        "imagen": "uploads\/img_68c1822e1263e.jpg",
+        "contenido": "Un nuevo episodio de violencia y crimen organizado mantiene en zozobra al sector transporte en Lima Metropolitana. Por segundo día consecutivo, los choferes de la línea A de la empresa ETUPSA 73, que cubre rutas desde Villa María del Triunfo hasta Lince, decidieron no salir a trabajar debido a las amenazas y ataques de mafias extorsivas. La medida fue tomada tras el último atentado ocurrido el domingo, cuando delincuentes rompieron las lunas de una de sus unidades repletas de pasajeros. Además, circuló un video en redes sociales en el que se observa a un sujeto dentro de un vehículo apuntando con un arma de fuego contra uno de los buses de la empresa, generando mayor temor entre los conductores.",
+        "video": "hjcHICAJy2c",
+        "fecha": "2025-09-10 15:50:38"
+    },
+    {
+        "id": 5,
+        "titulo": "Tito correteó a Diego tras no pagar pasaje y Nachito lo salvó",
+        "autor": "Katya Graciela Espinal Aguilera",
+        "imagen": "uploads\/img_68c2cf6ae109d.jpg",
+        "contenido": "en el capitulo del dia de ayer diego subio al micro de tito y al querer bajar sin pagar tito lo persoigio para que lo pagara, podra alncazarlo, vealo hoy a las  9:00",
+        "video": "xPN6w_Eozb8",
+        "fecha": "2025-09-11 15:32:26"
+    },
+    {
+        "id": 6,
+        "titulo": "prueba 7",
+        "autor": "jhon fernando",
+        "imagen": "uploads\/img_68c442b399c5f.jpg",
+        "contenido": "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq",
+        "video": "RoYV4mDiv68&list",
+        "fecha": "2025-09-12 17:56:35"
+    }
+]

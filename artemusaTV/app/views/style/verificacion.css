@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* Contenedor principal: divide 50% - 50% */
+.container {
+    background: #fff;
+    border-radius: 20px;   /* 🔥 Bordes redondeados */
+    box-shadow: 0 0 20px red;
+    display: flex;
+    overflow: hidden;      /* 🔥 Evita que los hijos sobresalgan */
+    width: 850px;
+    max-width: 100%;
+    min-height: 480px;
+    margin: auto;
+}
+
+/* Formulario (lado blanco) */
+.form-container {
+    flex: 1;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: #111;
+}
+
+.form-container h1 {
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.form-container input {
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    margin: 10px 0;
+    padding: 12px 15px;
+    font-size: 14px;
+    border-radius: 10px;
+    width: 100%;
+    outline: none;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+.form-container input:focus {
+    border: 1px solid #ff0000;
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.7);
+}
+
+.form-container button {
+    background: linear-gradient(90deg, #ff0000, #b30000);
+    color: #fff;
+    font-size: 14px;
+    padding: 12px 40px;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-top: 15px;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.7);
+    transition: all 0.3s ease-in-out;
+}
+
+.form-container button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 1);
+}
+
+.cancel-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: #e74c3c;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.cancel-link:hover {
+    text-decoration: underline;
+}
+
+/* Panel rojo (lado derecho) */
+.toggle-container {
+    flex: 1;
+    background: linear-gradient(135deg, #ff0000, #660000, #0d0d0d) !important; /* mismo que login */
+    color: #fff !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    text-align: center;
+    border-top-left-radius: 150px;
+    border-bottom-left-radius: 150px;
+}
+
+.toggle-container h1 {
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 0 0 10px #000;
+}
+
+.toggle-container p {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+/* Caja de mensaje */
+.alert-message {
+    background: rgba(0,0,0,0.5);
+    padding: 15px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border-left: 4px solid #ff4d4d;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.alert-message strong {
+    color: #ffb3b3;
+}
+
+/* Enlace cancelar */
+.cancel-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: #e74c3c;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.cancel-link:hover {
+    text-decoration: underline;
+}

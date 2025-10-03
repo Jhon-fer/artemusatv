@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sitio de Noticias</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+  <h1>📰 Portal de Noticias</h1>
+
+  <section id="lista-noticias">
+    <h2>Últimas Noticias</h2>
+    <div id="contenedor-noticias"></div>
+  </section>
+
+  <hr>
+
+  <section id="formulario">
+    <h2>Agregar Noticia</h2>
+    <form id="form-noticia" action="agregar.php" method="POST" enctype="multipart/form-data">
+      
+      <div class="form-group">
+        <label for="titulo">Título *</label>
+        <input type="text" id="titulo" name="titulo" required>
+      </div>
+
+      <div class="form-group">
+        <label for="autor">Autor de la noticia *</label>
+        <input type="text" id="autor" name="autor" required>
+      </div>
+
+      <div class="form-group">
+        <label for="imagen">Subir Imagen *</label>
+        <input type="file" id="imagen" name="imagen" accept="image/*" required>
+      </div>
+
+      <div class="form-group">
+        <label for="contenido">Contenido *</label>
+        <textarea id="contenido" name="contenido" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="video">ID de YouTube (opcional)</label>
+        <input type="text" id="video" name="video" placeholder="Ejemplo: dQw4w9WgXcQ">
+      </div>
+
+      <button type="submit">Guardar Noticia</button>
+    </form>
+  </section>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

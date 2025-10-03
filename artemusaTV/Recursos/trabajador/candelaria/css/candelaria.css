@@ -1,0 +1,590 @@
+/* ==========================
+   Reset y fuentes
+========================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* fondo blanco */
+    color: #222;
+    line-height: 1.6;
+}
+
+/* ==========================
+   Barra de Navegación
+========================== */
+nav {
+    background: linear-gradient(90deg, #d60000, #a80000); /* degradado rojo */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    height: 70px; 
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    position: relative;  /* 👈 necesario para el ::after */
+}
+
+/* Franja inferior */
+nav::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;           /* 👈 grosor de la franja */
+    background-color: #52007b; /* 👈 color morado */
+}
+
+nav .logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+nav .logo:hover {
+    color: #ffcc00;
+}
+
+nav img {
+    height: 50px;
+    margin-left: 50px;
+}
+
+/* ==========================
+   Lista de navegación (base)
+========================== */
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;   /* 👈 visible SOLO en escritorio */
+    align-items: center;
+}
+
+.nav-links li {
+    margin-left: 25px;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.nav-links li a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 6px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+}
+
+.nav-links li a:hover {
+    color: #333;
+    background: #ffcc00;
+}
+
+/* ==========================
+   Menú Usuario
+========================== */
+.user-menu > a {
+    font-weight: bold;
+    color: #ffcc00;
+    cursor: pointer;
+}
+
+.user-menu .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    min-width: 200px;
+    padding: 8px 0;
+    z-index: 999;
+}
+
+.user-menu .dropdown li {
+    margin: 0;
+    padding: 10px 15px;
+    color: #333;
+    font-size: 0.9rem;
+    display: block;
+}
+
+.user-menu .dropdown li a {
+    color: #d60000;
+    padding: 8px 12px;
+    display: block;
+    border-radius: 5px;
+}
+
+.user-menu .dropdown li a:hover {
+    background: #ffcc00;
+    color: #333;
+}
+
+.user-menu:hover .dropdown {
+    display: block;
+}
+
+/* ==========================
+   Menú hamburguesa
+========================== */
+.menu-toggle {
+    display: none; /* oculto en escritorio */
+    font-size: 1.8rem;
+    color: #fff;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+/* SOLO en escritorio */
+@media (min-width: 769px) {
+    .nav-links {
+        display: flex; /* visible en PC */
+    }
+}
+
+/* SOLO en móvil */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;  /* 👈 oculto al cargar */
+        flex-direction: column;
+        background: #a80000;
+        position: absolute;
+        top: 60px;
+        right: 15px;
+        width: 220px;
+        padding: 15px 0;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        animation: slideDown 0.3s ease;
+    }
+
+    .nav-links.active {
+        display: flex; /* 👈 aparece solo al dar click */
+    }
+
+    .menu-toggle {
+        display: block; /* visible el botón en móvil */
+    }
+}
+
+/* 🔹 Animación de despliegue */
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================
+   Contenido Principal
+========================== */
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.left-column,
+.center-column,
+.right-column {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+/* ==========================
+   Noticias estilo tarjeta
+========================== */
+.news-carousel {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.noticia-item {
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column;
+}
+
+.noticia-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+
+.noticia-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.texto-noticia {
+    padding: 12px;
+    background: white;
+}
+
+.texto-noticia h4 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0 0 6px 0;
+    color: #d60000 !important;
+}
+
+.texto-noticia p {
+    font-size: 0.9rem;
+    color: #222 !important;
+    margin: 0;
+    line-height: 1.4em;
+    max-height: 2.8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.more-news-link {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    padding: 10px 15px;
+    background: #d60000;
+    color: #fff !important;
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.more-news-link:hover {
+    background: purple;
+    color: white!important;
+}
+
+/* Fondo del modal formulario */
+.modal {
+  display: none; 
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.6);
+}
+
+/* Caja del modal formulario */
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 8px;
+  width: 50%;
+  max-width: 600px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Botón cerrar modal */
+.close {
+  float: right;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* Fondo oscuro del modal imagen */
+.img-modal {
+  display: none;
+  position: fixed; 
+  z-index: 10000;   /* Más alto que el resto */
+  top: 0;
+  left: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+/* Imagen ampliada centrada */
+.img-modal img {
+  display: block;
+  margin: auto;
+  max-width: 250%;   /* ocupa casi todo el ancho */
+  max-height: 200vh; /* ocupa casi toda la altura de pantalla */
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.4);
+  object-fit: contain; /* asegura proporción */
+}
+
+/* Texto debajo de la imagen */
+#caption {
+  margin-top: 15px;
+  text-align: center;
+  color: #ddd;
+  font-size: 18px;
+}
+
+.modal-body {
+  text-align: center;
+  color: #fff;
+  max-width: 90%;
+  margin: auto;
+}
+
+.modal-texto {
+  margin-top: 15px;
+  text-align: center;
+  color: #ddd;
+}
+
+.modal-texto h2 {
+  font-size: 22px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.modal-texto p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #ccc;
+}
+
+/* Botón de cierre modal imagen */
+.img-modal .close {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* ==========================
+   Pantalla de transmisión
+========================== */
+.live-screen {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* relación automática */
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    position: relative;
+}
+
+.live-screen iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Información dinámica de transmisión */
+.transmission-info {
+    background: #fff;
+    border-radius: 8px;
+    padding: 15px 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    margin-top: 10px;
+}
+
+.transmission-info h2 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #d60000;
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.transmission-info h2::before {
+    content: "🔴";
+    font-size: 1.1rem;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.4; }
+}
+
+.transmission-info p {
+    font-size: 1rem;
+    color: #444;
+    margin: 0;
+    line-height: 1.5em;
+}
+
+/* ==========================
+   CRONOGRAMA ESTILO CLARO
+========================== */
+.cronograma-card {
+    background: #ffffff;        /* Fondo blanco */
+    color: black;             /* Texto gris oscuro */
+    padding: 20px;
+    border: 4px solid #c62828;  /* Borde rojo elegante */
+    border-radius: 6px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08); /* Sombra suave */
+}
+
+/* Título */
+.cronograma-card h3 {
+    color: #000000;             /* Negro */
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    border-bottom: 4px solid #52007b; /* Línea roja */
+    display: inline-block;
+    padding-bottom: 4px;
+}
+
+/* Subtítulo (ej: Estadio) */
+.cronograma-card h4 {
+    color: #00796b;             /* Azul verdoso */
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+/* Línea divisoria debajo de la fecha */
+.cronograma-card .fecha {
+    border-bottom: 4px solid #52007b; /* Rojo oscuro */
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+    display: block;
+    font-weight: bold;
+    color: #d32f2f;             /* Resaltado en rojo */
+}
+
+/* Lista */
+.cronograma-list {
+    margin-top: 10px;
+    padding-left: 18px;
+}
+
+.cronograma-list li {
+    margin-bottom: 6px;
+    line-height: 1.6;
+    color: #444444;
+}
+
+/* Exhibiciones destacadas */
+.cronograma-list li b {
+    color: #c62828; /* Rojo para resaltar los EXHIB */
+}
+
+/* ==========================
+   Notas / caja derecha
+========================== */
+.right-column .card {
+    background: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.right-column .card h3 {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #333;
+}
+
+.right-column .card video,
+.right-column .card img {
+    width: 100%;         /* Que ocupen el ancho completo */
+    height: auto;        /* Mantienen proporción */
+    border-radius: 6px;
+    margin-bottom: 12px; /* Separación entre video e imagen */
+}
+
+.right-column .card img.publi-img {
+    max-height: 300px;   /* Límite de altura si no quieres que sea muy grande */
+    object-fit: cover;   /* Recorta bien si la imagen es muy alta */
+}
+
+/* ==========================
+   Footer
+========================== */
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #b30000; /* rojo fuerte */
+    color: #fff;               /* texto blanco */
+    padding: 20px;
+    border-top: 8px solid #52007b; /* franja negra superior */
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.footer-column {
+    flex: 1 1 33%;
+    margin: 10px 0;
+}
+
+.footer-column p, 
+.footer-column a {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.footer a {
+    color: #fff; /* enlaces blancos dentro del footer */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #ddd; /* cambio de color al pasar el mouse */
+    text-decoration: underline;
+}
+
+.footer .social-icons {
+    margin-top: 10px;
+}
+
+.footer .social-icons a {
+    margin: 0 8px;
+    color: #fff; /* íconos blancos */
+    transition: color 0.3s;
+}
+
+.footer .social-icons a:hover {
+    color: #ddd;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-column {
+        flex: 1 1 100%;
+    }
+}

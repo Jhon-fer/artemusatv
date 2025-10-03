@@ -1,0 +1,472 @@
+/* ==========================
+   Reset y fuentes
+========================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa; /* fondo blanco */
+    color: #222;
+    line-height: 1.6;
+}
+
+/* ==========================
+   Barra de Navegación
+========================== */
+nav {
+    background: linear-gradient(90deg, #d60000, #a80000); /* degradado rojo elegante */
+    border-bottom: 2px solid #900000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 30px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.2); /* sombra ligera */
+}
+
+nav .logo {
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: #fff; /* blanco para contraste */
+    text-decoration: none;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+}
+
+nav .logo:hover {
+    color: #ffcc00; /* dorado al pasar el mouse */
+}
+
+nav img {
+    height: 45px;
+    margin-left: 15px;
+}
+
+/* ==========================
+   Lista de navegación
+========================== */
+nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center; /* 🔥 centra verticalmente todo */
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin-left: 25px;
+    display: flex;
+    align-items: center; /* 🔥 asegura alineación perfecta */
+    position: relative; /* necesario para dropdown en user-menu */
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff; /* blanco legible sobre rojo */
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 6px 10px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    line-height: 1; /* evita que se vea más abajo */
+}
+
+nav ul li a:hover {
+    color: #333;
+    background: #ffcc00; /* resaltado en dorado */
+}
+
+/* ==========================
+   Menú Usuario
+========================== */
+.user-menu > a {
+    font-weight: bold;
+    color: #ffcc00; /* resalta el nombre */
+    cursor: pointer;
+}
+
+/* Dropdown */
+.user-menu .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%; /* justo debajo del botón */
+    right: 0;
+    background: #fff;
+    border-radius: 6px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    min-width: 200px;
+    padding: 8px 0;
+    z-index: 999;
+}
+
+.user-menu .dropdown li {
+    margin: 0;
+    padding: 10px 15px;
+    color: #333;
+    font-size: 0.9rem;
+    display: block;
+}
+
+.user-menu .dropdown li a {
+    color: #d60000;
+    padding: 8px 12px;
+    display: block;
+    border-radius: 5px;
+}
+
+.user-menu .dropdown li a:hover {
+    background: #ffcc00;
+    color: #333;
+}
+
+/* Mostrar el dropdown al pasar */
+.user-menu:hover .dropdown {
+    display: block;
+}
+
+/* ==========================
+   Menú hamburguesa (responsive)
+========================== */
+.menu-toggle {
+    display: none;
+    font-size: 1.8rem;
+    color: #333;
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        display: none;
+        background: #fff;
+        position: absolute;
+        top: 65px;
+        right: 20px;
+        width: 220px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        padding: 15px 0;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 12px 0;
+        text-align: center;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
+/* ==========================
+   Contenido Principal
+========================== */
+.main-container {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+.left-column,
+.center-column,
+.right-column {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+/* ==========================
+   Noticias estilo tarjeta
+========================== */
+.news-carousel {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.noticia-item {
+    background: #ffffff; /* fondo blanco */
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    flex-direction: column; /* imagen arriba, texto debajo */
+}
+
+.noticia-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+
+.noticia-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.texto-noticia {
+    padding: 12px;
+    background: white; /* fondo blanco para contraste */
+}
+
+.texto-noticia h4 {
+    font-size: 1rem;
+    font-weight: bold;
+    margin: 0 0 6px 0;
+    color: #d60000 !important; /* rojo, forzado */
+}
+
+.texto-noticia p {
+    font-size: 0.9rem;
+    color: #222 !important; /* gris oscuro/negro, forzado */
+    margin: 0;
+    line-height: 1.4em;
+    max-height: 2.8em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.more-news-link {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    padding: 10px 15px;
+    background: #d60000; /* rojo latina */
+    color: #fff !important; /* texto blanco */
+    font-weight: bold;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.more-news-link:hover {
+    background: purple; /* dorado al pasar el mouse */
+    color: white!important; /* texto oscuro sobre dorado */
+}
+
+/* ==========================
+   Pantalla de transmisión
+========================== */
+.live-screen {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* relación automática */
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    position: relative;
+}
+
+.live-screen iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* Información dinámica de transmisión */
+.transmission-info {
+    background: #fff;
+    border-radius: 8px;
+    padding: 15px 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    margin-top: 10px;
+}
+
+.transmission-info h2 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #d60000;
+    margin: 0 0 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.transmission-info h2::before {
+    content: "🔴";
+    font-size: 1.1rem;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0.4; }
+}
+
+.transmission-info p {
+    font-size: 1rem;
+    color: #444;
+    margin: 0;
+    line-height: 1.5em;
+}
+
+/* ==========================
+   Shorts de TikTok
+========================== */
+.tiktok-section {
+    margin: 40px auto;
+    text-align: center;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+.tiktok-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: #ff0050; /* Color oficial TikTok */
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 📌 Grid de 2 en 2 */
+.shorts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 320px); /* 2 columnas fijas */
+    gap: 25px;
+    justify-content: center; /* centra el grid */
+}
+
+/* 📌 Tarjetas estilo card */
+.shorts-card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    max-width: 320px; /* controla ancho máximo */
+}
+
+.shorts-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+/* 📌 Embed ocupa todo */
+.shorts-card blockquote {
+    width: 100% !important;
+    min-height: 480px; /* ajuste para TikTok */
+    margin: 0 auto !important;
+}
+
+/* 📌 Responsive */
+@media (max-width: 768px) {
+    .shorts-grid {
+        grid-template-columns: 1fr; /* en móvil, solo 1 columna */
+    }
+
+    .shorts-card blockquote {
+        min-height: 380px;
+    }
+}
+
+/* ==========================
+   Notas / caja derecha
+========================== */
+.right-column h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: #d60000;
+}
+
+.right-column form textarea {
+    width: 100%;
+    border-radius: 5px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.right-column form button {
+    background: #d60000;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.right-column form button:hover {
+    background: #a80000;
+}
+
+/* ==========================
+   Footer
+========================== */
+.footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: #b30000; /* rojo fuerte */
+    color: #fff;               /* texto blanco */
+    padding: 20px;
+    border-top: 8px solid #000; /* franja negra superior */
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+.footer-column {
+    flex: 1 1 33%;
+    margin: 10px 0;
+}
+
+.footer-column p, 
+.footer-column a {
+    margin: 5px 0;
+    font-size: 0.9rem;
+}
+
+.footer a {
+    color: #fff; /* enlaces blancos dentro del footer */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer a:hover {
+    color: #ddd; /* cambio de color al pasar el mouse */
+    text-decoration: underline;
+}
+
+.footer .social-icons {
+    margin-top: 10px;
+}
+
+.footer .social-icons a {
+    margin: 0 8px;
+    color: #fff; /* íconos blancos */
+    transition: color 0.3s;
+}
+
+.footer .social-icons a:hover {
+    color: #ddd;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-column {
+        flex: 1 1 100%;
+    }
+}

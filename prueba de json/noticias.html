@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Noticia</title>
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <h1>📰 Detalle de Noticia</h1>
+  <p><a href="index.html">⬅ Volver al inicio</a></p>
+  
+  <div id="noticia"></div>
+  
+  <script>
+    // Obtener ID de la URL (ej: noticia.html?id=3)
+    const params = new URLSearchParams(window.location.search);
+    const id = params.get("id");
+
+    if (!id) {
+      document.getElementById("noticia").innerHTML = "<p>❌ No se encontró la noticia.</p>";
+    } else {
+      fetch("data/noticias.json")
+        .then(res => res.json())
+        .then(noticias => {
+          const noticia = noticias.find(n => n.id == id);
+          if (!noticia) {
+            document.getElementById("noticia").innerHTML = "<p>❌ Noticia no encontrada.</p>";
+            return;
+          }
+
+          // Renderizar noticia completa
+          document.getElementById("noticia").innerHTML = `
+            <h2>${noticia.titulo}</h2>
+            <p><strong>Autor:</strong> ${noticia.autor}</p>
+            <small>Publicado el: ${noticia.fecha}</small>
+            ${noticia.imagen ? `<img src="${noticia.imagen}" alt="Imagen de noticia" style="max-width:100%; border-radius:10px; margin:10px 0;">` : ""}
+            <p>${noticia.contenido}</p>
+            ${noticia.video ? `<iframe width="100%" height="350" src="https://www.youtube.com/embed/${noticia.video}" frameborder="0" allowfullscreen></iframe>` : ""}
+          `;
+        })
+        .catch(err => {
+          console.error("Error al cargar la noticia:", err);
+          document.getElementById("noticia").innerHTML = "<p>⚠ Error al cargar la noticia.</p>";
+        });
+    }
+  </script>
+</body>
+</html>

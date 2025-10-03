@@ -1,0 +1,4 @@
+RewriteEngine On
+
+# ✅ Redirige siempre a visitante con ruta absoluta desde el root del servidor
+RewriteRule ^$ /Practicas/artemusaTV/Recursos/visitante/index.php [R=302,L]
