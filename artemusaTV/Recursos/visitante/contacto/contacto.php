@@ -1,6 +1,6 @@
 <?php
 
-$conexion = new mysqli("localhost", "root", "", "artemusatvphp");
+$conexion = new mysqli("localhost", "artemusa_artemusa", "7j4vV2mp5V", "artemusa_artemusatvphp");
 if ($conexion->connect_errno) {
     die("Error de conexión: " . $conexion->connect_error);
 }
@@ -29,6 +29,7 @@ while ($r = $respuestas_res->fetch_assoc()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/contacto.css">
     <link rel="icon" href="../img/ixon.jpg">
     <title>Comentarios | ARTEMUSA TV</title>
@@ -38,7 +39,7 @@ while ($r = $respuestas_res->fetch_assoc()) {
     <!-- NAV -->
     <nav>
         <div class="nav-left">
-            <img src="../img/nuevo logo011.png" alt="iconA" class="nav-banner">
+            <img src="../img/nuevo_logo011.png" alt="iconA" class="nav-banner">
             <a href="../index.php" class="logo">ARTEMUSA TV</a>
         </div>
 
@@ -52,7 +53,7 @@ while ($r = $respuestas_res->fetch_assoc()) {
             <li><a href="../pogramas/pogramas.php">Programas</a></li>
             <li><a href="../informacion/informacion.php">Informacion</a></li>
             <li><a href="contacto.php">Contacto</a></li>
-            <li><a href="/Practicas/artemusaTV/app/views/login.php">Iniciar sesión</a></li>
+            <li><a href="app/views/login.php">Iniciar sesión</a></li>
         </ul>
     </nav>
 
@@ -70,7 +71,7 @@ while ($r = $respuestas_res->fetch_assoc()) {
     <?php else: ?>
         <!-- Aviso si no hay sesión -->
         <p style="color:red; font-weight:bold;">
-            ⚠️ Debes <a href="/Practicas/artemusaTV/app/views/login.php">iniciar sesión</a> para escribir un comentario.
+            ⚠️ Debes <a href="app/views/login.php">iniciar sesión</a> para escribir un comentario.
         </p>
     <?php endif; ?>
 
@@ -109,33 +110,41 @@ while ($r = $respuestas_res->fetch_assoc()) {
     </div>
 
     <!-- Pie de página -->
-    <div class="footer">
-        <div class="footer-column">
-            <p>© 2025 ARTEMUSA TV<br>Todos los derechos reservados</p>
+    <footer class="footer">
+        <div class="footer-container">
+        
+            <div class="footer-column">
+                <h4>ARTEMUSA TV</h4>
+                <p>© 2025 ARTEMUSA TV<br>Todos los derechos reservados</p>
+                <p class="footer-slogan">Inspirando con arte y cultura.</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contáctanos</h4>
+                <p><i class="fas fa-envelope"></i> 
+                    <a href="mailto:artemusatv@gmail.com">artemusatv@gmail.com</a></p>
+                <p><i class="fas fa-phone"></i> 
+                    <a href="tel:+51997334477">997 334 477</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> 
+                    <a href="https://maps.app.goo.gl/RMpHgF72i2AsMyXf6" target="_blank" rel="noopener noreferrer">Ubicación</a></p>
+                <p><i class="fas fa-clock"></i> Lunes a Viernes 08:00 - 20:00</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Síguenos</h4>
+                <ul class="social-icons">
+                    <li><a href="https://www.facebook.com/artemusatelevision" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="https://www.youtube.com/@artemusatelevision" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="https://www.tiktok.com/@artemusa_tv" target="_blank"><i class="fab fa-tiktok"></i></a></li>
+                </ul>
+            </div>
+
         </div>
-        <div class="footer-column">
-            <p>Contacto: <a href="mailto:artemusatv@gmail.com">artemusatv@gmail.com</a></p>
-            <p>Celular: <a href="tel:+51997334477">997 334 477</a></p>
-            <p>Ubicación: <a href="https://maps.app.goo.gl/RMpHgF72i2AsMyXf6" target="_blank" rel="noopener noreferrer">
-                Jr. Arequipa N° 255 con Jr. Cajamarca, Puno, Perú
-            </a></p>
-            <p>Horario: Lunes a Viernes 08:00 - 20:00</p>
+
+        <div class="footer-bottom">
+            <p>Desarrollado por <strong>ARTEMUSA Tech</strong></p>
         </div>
-        <div class="footer-column">
-            <h4>Síguenos</h4>
-            <ul class="social-icons">
-                <li><a href="https://www.facebook.com/artemusatelevision" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-facebook-f"></i> Facebook
-                </a></li>
-                <li><a href="https://www.youtube.com/@artemusatelevision" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-youtube"></i> YouTube
-                </a></li>
-                <li><a href="https://www.tiktok.com/@artemusa_tv" target="_blank" rel="noopener noreferrer">
-                    <i class="fab fa-tiktok"></i> TikTok
-                </a></li>
-            </ul>
-        </div>
-    </div>
+    </footer>
 
     <script>
         // Esperamos que el DOM cargue

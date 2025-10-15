@@ -32,9 +32,13 @@ $timestamp = strtotime($fechaObjetivo);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Keywords" content="Puno, televicion, noticias">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="Descripción" content="Artemusa TV es la señal informativa de Puno para el mundo, donde encontrarás noticias locales, cultura, eventos y entrevistas que muestran la esencia de nuestra región con calidad y transparencia.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css?v=1.0">
     <link rel="stylesheet" href="../estiloCelular.css">
+    <link rel="stylesheet" href="css/normalize.css">
     <link rel="icon" href="img/ixon.jpg">
     <title>ARTEMUSA TV</title>
 </head>
@@ -55,7 +59,7 @@ $timestamp = strtotime($fechaObjetivo);
             <li><a href="pogramas/pogramas.php">Programas</a></li>
             <li><a href="informacion/informacion.php">Informacion</a></li>
             <li><a href="contacto/contacto.php">Contacto</a></li>
-            <li><a href="/Practicas/artemusaTV/app/views/login.php">Iniciar sesión</a></li>
+            <li><a href="app/views/login.php">Iniciar sesión</a></li>
         </ul>
     </nav>
 
@@ -181,10 +185,11 @@ $timestamp = strtotime($fechaObjetivo);
                 <?php if (!isset($_SESSION['usuario_id'])): ?>
                     <p class="alerta">
                         ⚠️ Debes 
-                        <a href="/Practicas/artemusaTV/app/views/login.php">iniciar sesión</a> 
+                        <a href="app/views/login.php">iniciar sesión</a>
                         para escribir una nota.
                     </p>
                 <?php else: ?>
+                    
                     <!-- Formulario para agregar nota -->
                     <form method="POST" action="" class="nota-form">
                         <textarea name="nota" rows="4" placeholder="Escribe tu nota aquí..." required></textarea>
@@ -196,13 +201,13 @@ $timestamp = strtotime($fechaObjetivo);
             <div class="card">
                 <h3>📝 Mis notas</h3>
                 <?php
-                $conexion = new mysqli("localhost", "root", "", "artemusatvphp");
+                $conexion = new mysqli("localhost", "artemusa_artemusa", "7j4vV2mp5V", "artemusa_artemusatvphp");
                 if ($conexion->connect_errno) {
                     die("Error de conexión: " . $conexion->connect_error);
                 }
 
                 if (isset($_POST['guardar_nota']) && isset($_SESSION['usuario_id'])) {
-                    $nota = trim($_POST['nota']);
+                    $nota = substr(trim($_POST['nota']), 0, 500); // máximo 500 caracteres
                     $usuario_id = $_SESSION['usuario_id'];
 
                     if (!empty($nota)) {
@@ -252,25 +257,41 @@ $timestamp = strtotime($fechaObjetivo);
     </div>
 
     <!-- Pie de página -->
-    <div class="footer">
-        <div class="footer-column">
-            <p>© 2025 ARTEMUSA TV<br>Todos los derechos reservados</p>
+    <footer class="footer">
+        <div class="footer-container">
+        
+            <div class="footer-column">
+                <h4>ARTEMUSA TV</h4>
+                <p>© 2025 ARTEMUSA TV<br>Todos los derechos reservados</p>
+                <p class="footer-slogan">Inspirando con arte y cultura.</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contáctanos</h4>
+                <p><i class="fas fa-envelope"></i> 
+                    <a href="mailto:artemusatv@gmail.com">artemusatv@gmail.com</a></p>
+                <p><i class="fas fa-phone"></i> 
+                    <a href="tel:+51997334477">997 334 477</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> 
+                    <a href="https://maps.app.goo.gl/RMpHgF72i2AsMyXf6" target="_blank" rel="noopener noreferrer">Ubicación</a></p>
+                <p><i class="fas fa-clock"></i> Lunes a Viernes 08:00 - 20:00</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Síguenos</h4>
+                <ul class="social-icons">
+                    <li><a href="https://www.facebook.com/artemusatelevision" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="https://www.youtube.com/@artemusatelevision" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="https://www.tiktok.com/@artemusa_tv" target="_blank"><i class="fab fa-tiktok"></i></a></li>
+                </ul>
+            </div>
+
         </div>
-        <div class="footer-column">
-            <p>Contacto: <a href="mailto:artemusatv@gmail.com">artemusatv@gmail.com</a></p>
-            <p>Celular: <a href="tel:+51997334477">997 334 477</a></p>
-            <p>Ubicación: <a href="https://maps.app.goo.gl/RMpHgF72i2AsMyXf6" target="_blank" rel="noopener noreferrer">
-            <p>Horario: Lunes a Viernes 08:00 - 20:00</p>
+
+        <div class="footer-bottom">
+            <p>Desarrollado por <strong>ARTEMUSA Tech</strong></p>
         </div>
-        <div class="footer-column">
-            <h4>Síguenos</h4>
-            <ul class="social-icons">
-                <li><a href="https://www.facebook.com/artemusatelevision" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a></li>
-                <li><a href="https://www.youtube.com/@artemusatelevision" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
-                <li><a href="https://www.tiktok.com/@artemusa_tv" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a></li>
-            </ul>
-        </div>
-    </div>
+    </footer>
 
     <script src="js/java.js"></script>
     <script>

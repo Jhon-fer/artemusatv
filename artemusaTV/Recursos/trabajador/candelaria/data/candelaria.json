@@ -5,5 +5,26 @@
         "imagen": "uploads\/img_68d698bdba664.png",
         "contenido": "prueba de que si funciona bien el php y el json",
         "fecha": "2025-09-26 15:44:29"
+    },
+    {
+        "id": 2,
+        "titulo": "𝐅𝐞𝐥𝐢𝐜𝐢𝐝𝐚𝐝𝐞𝐬 𝐚 𝐭𝐨𝐝𝐨𝐬 𝐥𝐨𝐬 𝐜𝐥𝐚𝐬𝐢𝐟𝐢𝐜𝐚𝐝𝐨𝐬",
+        "imagen": "uploads\/img_68e6682ebe34a.jpg",
+        "contenido": "Con mucha alegría compartimos la lista oficial de agrupaciones que han clasificado al Concurso de Danzas Originarias 2026, tras su destacada participación en el XLVIII Concurso Regional de Sikuris 2025 organizado por la Federación Regional de Folklore y Cultura de Puno.",
+        "fecha": "2025-10-08 15:33:34"
+    },
+    {
+        "id": 3,
+        "titulo": "VENERACION Y PARADA EN HONOR A LA SANTÍSIMA VIRGEN DE LA CANDELARIA - 2026 ",
+        "imagen": "uploads\/img_68ed1252cb78b.png",
+        "contenido": "VENERACION Y PARADA EN HONOR A LA SANTÍSIMA VIRGEN DE LA CANDELARIA - 2026 ",
+        "fecha": "2025-10-13 16:53:06"
+    },
+    {
+        "id": 4,
+        "titulo": "VENERACION Y PARADA EN HONOR A LA SANTÍSIMA VIRGEN DE LA CANDELARIA - 2026",
+        "imagen": "uploads\/img_68ed13b6bd9bf.jpg",
+        "contenido": "VENERACION Y PARADA EN HONOR A LA SANTÍSIMA VIRGEN DE LA CANDELARIA - 2026",
+        "fecha": "2025-10-13 16:59:02"
     }
 ]

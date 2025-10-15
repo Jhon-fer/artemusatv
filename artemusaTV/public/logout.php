@@ -1,8 +1,8 @@
 <?php
 session_start();
-session_unset();  // limpia variables de sesión
-session_destroy(); // destruye la sesión
+session_unset();
+session_destroy();
 
-// Redirigir al login general
-header("Location: /Practicas/artemusaTV/app/views/login.php");
-exit;
+// Redirige al login
+header("Location: ../app/views/login.php"); // desde public/ sube a public_html/ y entra a app/views/login.php
+exit();

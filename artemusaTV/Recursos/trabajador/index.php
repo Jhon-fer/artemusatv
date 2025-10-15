@@ -1,26 +1,54 @@
 <?php
 session_start();
+
+// Si no hay sesión activa, redirigir al login
 if (!isset($_SESSION['usuario'])) {
-    header("Location: /Practicas/artemusaTV/app/views/login.php");
+    header("Location: ../../app/views/login.php");
     exit();
 }
 
+// ===============================
 // Conexión a la base de datos
-$conexion = new mysqli("localhost", "root", "", "artemusatvphp");
+// ===============================
+$conexion = new mysqli("localhost", "artemusa_artemusa", "7j4vV2mp5V", "artemusa_artemusatvphp");
 if ($conexion->connect_errno) {
-    die("Error de conexión: " . $conexion->connect_error);
+    die("❌ Error de conexión: " . $conexion->connect_error);
 }
 
-// Obtener ID del usuario actual
+// ===============================
+// Datos del usuario logueado
+// ===============================
 $usuario_id = $_SESSION['usuario_id'];
 
-// Obtener rol del usuario actual
-$consultaRol = $conexion->query("SELECT rol FROM usuarios WHERE id = $usuario_id");
-$rol = $consultaRol->fetch_assoc()['rol'];
+$stmt = $conexion->prepare("SELECT rol FROM usuarios WHERE id = ?");
+$stmt->bind_param("i", $usuario_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$rol = $result->fetch_assoc()['rol'] ?? '';
+$stmt->close();
 
-// Mostrar notas según el rol
+// ===============================
+// Guardar nueva nota
+// ===============================
+if (isset($_POST['guardar_nota'])) {
+    $nota = trim($_POST['nota']);
+
+    if (!empty($nota)) {
+        $stmt = $conexion->prepare("INSERT INTO notas_trabajador (usuario_id, nota) VALUES (?, ?)");
+        $stmt->bind_param("is", $usuario_id, $nota);
+        $stmt->execute();
+        $stmt->close();
+
+        // Evitar reenvío al recargar
+        header("Location: " . $_SERVER['PHP_SELF']);
+        exit;
+    }
+}
+
+// ===============================
+// Mostrar notas según rol
+// ===============================
 if ($rol === 'viewer' || $rol === 'trabajador') {
-    // Puede ver TODAS las notas
     $resultado = $conexion->query("
         SELECT n.nota, n.creado_en, u.nombre, u.rol 
         FROM notas_trabajador n 
@@ -28,7 +56,6 @@ if ($rol === 'viewer' || $rol === 'trabajador') {
         ORDER BY n.creado_en DESC
     ");
 } else {
-    // Solo ve sus propias notas
     $resultado = $conexion->query("
         SELECT n.nota, n.creado_en, u.nombre, u.rol 
         FROM notas_trabajador n 
@@ -38,6 +65,9 @@ if ($rol === 'viewer' || $rol === 'trabajador') {
     ");
 }
 
+// ===============================
+// Canal de streaming (M3U)
+// ===============================
 $m3uUrl = "http://64.76.204.10:25461/get.php?username=puno&password=puno&type=m3u&output=hls";
 $m3uContent = @file_get_contents($m3uUrl);
 
@@ -60,6 +90,12 @@ if ($m3uContent !== false) {
         }
     }
 }
+
+// ===============================
+// Fecha objetivo (contador)
+// ===============================
+$fechaObjetivo = "2026-02-02 00:00:00";
+$timestamp = strtotime($fechaObjetivo);
 ?>
 
 <!DOCTYPE html>
@@ -203,7 +239,7 @@ if ($m3uContent !== false) {
     <!-- NAV -->
     <nav class="navbar">
          <div class="nav-left">
-            <img src="img/nuevo logo011.png" alt="iconA" class="nav-banner">
+            <img src="img/nuevo_logo011.png" alt="iconA" class="nav-banner">
             <a href="index.php" class="logo">ARTEMUSA TV</a>
         </div>
 
@@ -214,7 +250,6 @@ if ($m3uContent !== false) {
         <ul class="nav-links" id="nav-links">
             <li><a href="index.php">Inicio</a></li>
             <li><a href="pogramasN/index.php">Noticias</a></li>
-            <li><a href="deporte/deporte.php">Deportes</a></li>
             <li><a href="candelaria/candelaria.php">Soy Candelaria</a></li>
             <li><a href="pogramas/pogramas.php">Programas</a></li>
             <li><a href="informacion/informacion.php">Informacion</a></li>
@@ -222,14 +257,14 @@ if ($m3uContent !== false) {
 
             <!-- Menú de usuario -->
             <li class="user-menu">
-            <a>
+                <a>
                 <?= $_SESSION['usuario'] ?? 'Invitado' ?> ⬇
-            </a>
-            <ul class="dropdown">
-                <li>Correo: <?= $_SESSION['correo'] ?? '' ?></li>
-                <li>Rol: <?= $_SESSION['rol'] ?? '' ?></li>
-                <li><a href="../../public/logout.php">Cerrar sesión</a></li>
-            </ul>
+                </a>
+                <ul class="dropdown">
+                    <li>Correo: <?= htmlspecialchars($_SESSION['correo'] ?? '') ?></li>
+                    <li>Rol: <?= htmlspecialchars($_SESSION['rol'] ?? '') ?></li>
+                    <li><a href="../../public/logout.php">Cerrar sesión</a></li>
+                </ul>
             </li>
         </ul>
     </nav>
@@ -291,7 +326,6 @@ if ($m3uContent !== false) {
 
         <!-- Columna central: Pantalla de transmisión -->
         <div class="center-column">
-            <!-- Pantalla de transmisión //////////////////////////////////////////////////////////// -->
             <div class="live-screen" style="position: relative; width: 100%; max-width: 1200px; padding-bottom: 56.25%; /* 16:9 */ height: 0; margin: 0 auto;">
                 <iframe 
                     src="https://ssh101.com/securelive/index.php?id=artemusatv02&adult=yes"
@@ -310,45 +344,51 @@ if ($m3uContent !== false) {
                 </p>
             </div>
 
+            <!-- Sección TikToks Destacados -->
             <div class="tiktok-section">
                 <h2>🎬 TikToks Destacados</h2>
                 <div class="shorts-grid">
-
                     <!-- TikTok 1 -->
                     <div class="shorts-card">
-                        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@artemusa_tv/video/7553138157496143120" data-video-id="7553138157496143120">
+                        <blockquote class="tiktok-embed" 
+                            cite="https://www.tiktok.com/@artemusa_tv/video/7553138157496143120" 
+                            data-video-id="7553138157496143120">
                             <section></section>
                         </blockquote>
                     </div>
 
                     <!-- TikTok 2 -->
                     <div class="shorts-card">
-                        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@artemusa_tv/video/7484753710636190981" data-video-id="7484753710636190981">
+                        <blockquote class="tiktok-embed" 
+                            cite="https://www.tiktok.com/@artemusa_tv/video/7484753710636190981" 
+                            data-video-id="7484753710636190981">
                             <section></section>
                         </blockquote>
                     </div>
 
                     <!-- TikTok 3 -->
                     <div class="shorts-card">
-                        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@artemusa_tv/video/7480621623976987959" data-video-id="7480621623976987959">
+                        <blockquote class="tiktok-embed" 
+                            cite="https://www.tiktok.com/@artemusa_tv/video/7480621623976987959" 
+                            data-video-id="7480621623976987959">
                             <section></section>
                         </blockquote>
                     </div>
 
                     <!-- TikTok 4 -->
                     <div class="shorts-card">
-                        <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@artemusa_tv/video/7470288572298415366" data-video-id="7470288572298415366">
+                        <blockquote class="tiktok-embed" 
+                            cite="https://www.tiktok.com/@artemusa_tv/video/7470288572298415366" 
+                            data-video-id="7470288572298415366">
                             <section></section>
                         </blockquote>
                     </div>
-
-                </div>
-            </div>
-        </div>
+                </div> <!-- cierre .shorts-grid -->
+            </div> <!-- cierre .tiktok-section -->
+        </div> <!-- ✅ cierre .center-column -->
 
         <!-- Columna derecha: Cuadro adicional -->
         <div class="right-column">
-            
             <div class="card">
                 <h2>Notas / Aclaraciones</h2>
 
@@ -364,29 +404,15 @@ if ($m3uContent !== false) {
                 <div class="side-box">
                     <h3>Mis notas</h3>
                     <?php
-                    $conexion = new mysqli("localhost", "root", "", "artemusatvphp");
-                    if ($conexion->connect_errno) {
-                        die("Error de conexión: " . $conexion->connect_error);
-                    }
-
-                    // Guardar nota
-                    if (isset($_POST['guardar_nota'])) {
-                        $nota = trim($_POST['nota']);
-                        $usuario_id = $_SESSION['usuario_id'];
-
-                        if (!empty($nota)) {
-                            $stmt = $conexion->prepare("INSERT INTO notas_trabajador (usuario_id, nota) VALUES (?, ?)");
-                            $stmt->bind_param("is", $usuario_id, $nota);
-                            $stmt->execute();
-                            $stmt->close();
-
-                            echo "<p style='color:green;'>✅ Nota guardada</p>";
-                        }
-                    }
 
                     // Mostrar notas del usuario actual
                     $usuario_id = $_SESSION['usuario_id'];
-                    $resultado = $conexion->query("SELECT id, usuario_id, nota, creado_en FROM notas_trabajador ORDER BY creado_en DESC");
+                    $resultado = $conexion->query("
+                    SELECT id, usuario_id, nota, creado_en 
+                    FROM notas_trabajador 
+                    WHERE usuario_id = $usuario_id 
+                    ORDER BY creado_en DESC
+                    ");
 
                     if ($resultado->num_rows > 0) {
                         echo "<ul>";
@@ -401,11 +427,10 @@ if ($m3uContent !== false) {
                     } else {
                         echo "<p>No hay notas guardadas aún.</p>";
                     }
-
-                    $conexion->close();
                     ?>
                 </div>
-                
+            </div>
+
             <div class="card publicidad">
                 <h3>📢 Vive la Candelaria aquí</h3>
                 <a href="candelaria/candelaria.php"><img src="../publicidad/candelaria.jpg" alt="candelaria"></a>
@@ -419,37 +444,79 @@ if ($m3uContent !== false) {
                     <a href="https://www.minsa.gob.pe/" target="_blank"><img src="../publicidad/vacuna.jpg" alt="vacuna"></a>
                 </div>
             </div>
-
-        </div>
-    </div>
+        </div> <!-- ✅ cierre .right-column -->
+    </div> <!-- ✅ cierre .main-container -->
 
     <!-- Pie de página -->
     <footer class="footer">
         <div class="footer-container">
             <div class="footer-column">
+                <h4>ARTEMUSA TV</h4>
                 <p>© 2025 ARTEMUSA TV<br>Todos los derechos reservados</p>
+                <p class="footer-slogan">Inspirando con arte y cultura.</p>
             </div>
+
             <div class="footer-column">
-                <p>Contacto: <a href="mailto:artemusatv@gmail.com">artemusatv@gmail.com</a></p>
-                <p>Celular: <a href="tel:+51997334477">997 334 477</a></p>
-                <p>Ubicación: 
-                    <a href="https://maps.app.goo.gl/RMpHgF72i2AsMyXf6" target="_blank" rel="noopener noreferrer">
-                    Ver en Google Maps</a>
-                </p>
-                <p>Horario: Lunes a Viernes 08:00 - 20:00</p>
+                <h4>Contáctanos</h4>
+                <p><i class="fas fa-envelope"></i> 
+                    <a href="mailto:artemusatv@gmail.com">artemusatv@gmail.com</a></p>
+                <p><i class="fas fa-phone"></i> 
+                    <a href="tel:+51997334477">997 334 477</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> 
+                    <a href="https://maps.app.goo.gl/RMpHgF72i2AsMyXf6" target="_blank" rel="noopener noreferrer">Ubicación</a></p>
+                <p><i class="fas fa-clock"></i> Lunes a Viernes 08:00 - 20:00</p>
             </div>
+
             <div class="footer-column">
                 <h4>Síguenos</h4>
                 <ul class="social-icons">
-                    <li><a href="https://www.facebook.com/artemusatelevision" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a></li>
-                    <li><a href="https://www.youtube.com/@artemusatelevision" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
-                    <li><a href="https://www.tiktok.com/@artemusa_tv" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a></li>
+                    <li><a href="https://www.facebook.com/artemusatelevision" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="https://www.youtube.com/@artemusatelevision" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="https://www.tiktok.com/@artemusa_tv" target="_blank"><i class="fab fa-tiktok"></i></a></li>
                 </ul>
             </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>Desarrollado por <strong>Jhon Fer.</strong> para <strong>ARTEMUSA</strong></p>
         </div>
     </footer>
 
     <script src="js/java.js"></script>
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+    <script>
+        // 📌 Obtener la fecha objetivo desde PHP
+        const fechaObjetivo = new Date(<?php echo $timestamp * 1000; ?>);
+
+        function actualizarContador() {
+            const ahora = new Date();
+            const diferencia = fechaObjetivo - ahora;
+
+            if (diferencia <= 0) {
+                document.getElementById("contador").innerHTML = "¡Ha llegado el día!";
+                return;
+            }
+
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            document.getElementById("contador").innerHTML = 
+                dias + "d " + horas + "h " + minutos + "m " + segundos + "s ";
+        }
+
+        // Actualizar cada segundo
+        setInterval(actualizarContador, 1000);
+        actualizarContador();
+    </script>
     <!-- Pie de página <script src="js/noticia-carrucel.js"></script>-->
     <!-- <script src="js/pogramacion.js"></script>-->
     <!-- Script de TikTok (necesario una sola vez en la página) -->
@@ -464,11 +531,14 @@ if ($m3uContent !== false) {
     </script>
     <script>
         var video = document.getElementById('video');
-        var videoSrc = "<?php echo $canalUrl; ?>"; // tu m3u8 dinámico
+        var videoSrc = "<?php echo $canalUrl ?: ''; ?>";
+        if (!videoSrc) {
+            console.log("⚠️ Canal no disponible en el M3U.");
+        }
 
         if (Hls.isSupported()) {
             var hls = new Hls({
-                liveSyncDuration: 2S,          // segundos de atraso respecto al vivo
+                liveSyncDuration: 2,          // segundos de atraso respecto al vivo
                 liveMaxLatencyDuration: 10,   // máximo retraso tolerado
                 manifestLoadingTimeOut: 20000,
                 manifestLoadingMaxRetry: 20,
@@ -510,3 +580,6 @@ if ($m3uContent !== false) {
     </script>
 </body>
 </html>
+<?php
+$conexion->close();
+?>

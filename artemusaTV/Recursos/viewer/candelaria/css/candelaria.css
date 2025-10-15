@@ -14,6 +14,11 @@ body {
     line-height: 1.6;
 }
 
+html, body {
+    max-width: 100%;
+    overflow-x: hidden; /* evita scroll horizontal */
+}
+
 /* ==========================
    Barra de Navegación
 ========================== */
@@ -22,8 +27,8 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 30px;
-    height: 70px; 
+    padding: 12px 40px; /* más espacio interno */
+    height: 80px;        /* navbar más alta */
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -96,16 +101,24 @@ nav img {
 }
 
 /* ==========================
-   Menú Usuario
+   Menú Usuario (solo clic)
 ========================== */
+.user-menu {
+    position: relative;
+}
+
 .user-menu > a {
     font-weight: bold;
     color: #ffcc00;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
+/* 🔒 Oculto por defecto */
 .user-menu .dropdown {
-    display: none;
+    display: none !important; /* 👈 fuerza que esté oculto */
     position: absolute;
     top: 100%;
     right: 0;
@@ -117,12 +130,22 @@ nav img {
     z-index: 999;
 }
 
+/* 🔓 Solo visible cuando tiene la clase .active */
+.user-menu.active .dropdown {
+    display: block !important; /* 👈 fuerza que se muestre al hacer clic */
+}
+
+/* Evita que :hover interfiera */
+.user-menu:hover .dropdown {
+    display: none !important; /* 👈 desactiva completamente el hover */
+}
+
+/* Estilo interno */
 .user-menu .dropdown li {
     margin: 0;
     padding: 10px 15px;
     color: #333;
     font-size: 0.9rem;
-    display: block;
 }
 
 .user-menu .dropdown li a {
@@ -137,102 +160,124 @@ nav img {
     color: #333;
 }
 
-.user-menu:hover .dropdown {
-    display: block;
+/* Responsive */
+@media (max-width: 768px) {
+    .user-menu .dropdown {
+        position: static;
+        background: #b00000;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 5px 0;
+    }
+
+    .user-menu .dropdown li {
+        color: #fff;
+    }
+
+    .user-menu .dropdown li a {
+        color: #ffcc00;
+    }
 }
 
 /* ==========================
-   Botón hamburguesa
+   Menú hamburguesa (responsive)
 ========================== */
 .menu-toggle {
     display: none;
-    font-size: 28px;
-    background: none;
-    border: none;
-    color: #fff;
+    font-size: 1.8rem;
+    color: #333;
     cursor: pointer;
 }
 
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column;
+        display: none;
+        background: #fff;
+        position: absolute;
+        top: 65px;
+        right: 20px;
+        width: 220px;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+        padding: 15px 0;
+    }
+
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 12px 0;
+        text-align: center;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+}
+
 /* ==========================
-   Responsive (móvil)
+   Responsive
 ========================== */
 @media (max-width: 768px) {
+  /* Muestra el botón hamburguesa */
   .menu-toggle {
     display: block;
+    font-size: 1.8rem;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    align-self: center;
   }
 
+  /* Ajusta el contenedor del logo y botón */
+  .navbar {
+    flex-wrap: nowrap; /* evita que el botón baje */
+    justify-content: space-between; /* separa logo y botón */
+    align-items: center;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  /* Menú oculto inicialmente */
   .nav-links {
-    display: none;  /* oculto por defecto */
+    display: none;
     flex-direction: column;
-    background: #b30000;
+    background-color: #b00000;
     position: absolute;
-    top: 70px;        /* igual a la altura del nav */
-    right: 0;
+    top: 80px; /* justo debajo de la navbar */
+    right: 20px;
+    width: 220px;
     padding: 15px;
-    border-radius: 0 0 8px 8px;
-    width: 100%;      /* ocupa todo el ancho */
-    z-index: 2000;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    z-index: 999;
   }
 
+  /* Menú visible cuando está activo */
   .nav-links.active {
     display: flex;
+    animation: slideDown 0.3s ease forwards;
   }
 
-  .nav-links li {
-    text-align: center;
-    padding: 8px 0;
+  @keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
-  .nav-links li a {
-    color: #fff;
-    font-size: 1.1rem;
-    width: 100%;
-  }
-
-  /* ==========================
-     Tablas responsive
-  ========================== */
-  table thead,
-  table tr th {
-      display: none; /* Oculta encabezados */
-  }
-
-  table, 
-  table tbody, 
-  table tr, 
-  table td {
-      display: block;
-      width: 100%;
-  }
-
-  table tr {
-      margin-bottom: 15px;
-      border: 1px solid #333;
-      border-radius: 10px;
-      padding: 10px;
-      background: #2a2a2a;
-  }
-
-  table td {
-      text-align: left;
-      padding: 10px;
-      border: none;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      position: relative;
-  }
-
-  table td:last-child {
-      border-bottom: none;
-  }
-
-  /* Mostrar el nombre de la columna con data-label */
-  table td::before {
-      content: attr(data-label);
-      font-weight: bold;
-      color: #ff4c4c;
-      display: block;
-      margin-bottom: 6px;
+  /* Oculta el menú de usuario dentro del menú desplegable si quieres */
+  .user-menu .dropdown {
+    position: static;
+    background: none;
+    box-shadow: none;
   }
 }
 
@@ -240,72 +285,109 @@ nav img {
    Contenido Principal
 ========================== */
 .main-container {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    gap: 20px;
-    padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 20px;
+  padding: 20px;
 }
 
 .left-column,
 .center-column,
 .right-column {
-    background: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 15px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
 }
 
 /* ==========================
-   Responsive Móvil
+   Video de presentación
 ========================== */
+.viedo-presentacion {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #000;
+}
+
+.viedo-presentacion video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border: none;
+  outline: none;
+  pointer-events: none;
+  user-select: none;
+  max-height: 80vh; /* evita que sea demasiado alto */
+  transition: all 0.3s ease;
+}
+
+/* ===============================
+   Responsivo (móviles y tablets)
+================================= */
 @media (max-width: 768px) {
-    /* 📱 Columnas apiladas */
-    .main-container {
-        grid-template-columns: 1fr; /* ✅ una sola columna */
-        gap: 15px;
-        padding: 10px;
-    }
+  .main-container {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    padding: 10px;
+  }
 
-    /* Orden en móvil */
-    .center-column { order: 1; } /* ✅ primero transmisión */
-    .left-column   { order: 2; } /* después noticias */
-    .right-column  { order: 3; } /* al final la columna derecha */
+  .viedo-presentacion {
+    overflow: hidden;
+    border-radius: 0;
+    background: #000;
+  }
 
-    /* 📱 Ajustes de estilos */
-    .noticia-item img {
-        height: auto;
-        max-height: 200px;
-        object-fit: cover;
-    }
+  .viedo-presentacion video {
+    width: 100%;
+    height: auto;
+    object-fit: contain; /* muestra todo el video sin recortarlo */
+    max-height: 60vh; /* ajusta a la altura del móvil */
+  }
 
-    .cronograma-card {
-        padding: 15px;
-        font-size: 0.95rem;
-    }
+  /* 📺 Que la repetición (center-column) aparezca primero */
+  .center-column {
+    order: 1;
+  }
 
-    .cronograma-card h3 {
-        font-size: 16px;
-    }
+  .left-column {
+    order: 2;
+  }
 
-    .footer {
-        flex-direction: column;
-        text-align: center;
-    }
+  .right-column {
+    order: 3;
+  }
+}
 
-    .footer-column {
-        flex: 1 1 100%;
-        margin: 10px 0;
-    }
+/* ==========================
+   Columnas
+========================== */
+.left-column {
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
 
-    .modal-content {
-        width: 90%;
-        margin: 20% auto;
-    }
+.center-column {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
 
-    .img-modal img {
-        max-width: 95%;
-        max-height: 80vh;
-    }
+.right-column {
+    flex: 0 0 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }
 
 /* ==========================
@@ -468,20 +550,33 @@ nav img {
   color: #ccc;
 }
 
-/* Botón de cierre modal imagen */
 .img-modal .close {
-  position: absolute;
-  top: 20px;
-  right: 40px;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 10001;
+}
+
+/* X visible */
+.img-modal .close::before {
+    content: "✖";
+    display: inline-block;
+    font-size: 35px;  /* grande para celular */
+    color: #fff;
+    background: rgba(0,0,0,0.3); /* opcional: fondo semitransparente */
+    border-radius: 50%;
+    padding: 5px 10px;  /* área táctil más grande */
 }
 
 /* ==========================
    Pantalla de transmisión
 ========================== */
+.center-column h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
 .live-screen {
     width: 100%;
     aspect-ratio: 16 / 9; /* relación automática */
@@ -524,6 +619,11 @@ nav img {
     animation: blink 1s infinite;
 }
 
+.transmission-info,
+.tiktok-section {
+    width: 100%;
+}
+
 @keyframes blink {
     50% { opacity: 0.4; }
 }
@@ -540,12 +640,19 @@ nav img {
 ========================== */
 .cronograma-card {
     background: #ffffff;        /* Fondo blanco */
-    color: black;             /* Texto gris oscuro */
+    color: black;               /* Texto gris oscuro */
     padding: 20px;
     border: 4px solid #c62828;  /* Borde rojo elegante */
     border-radius: 6px;
     margin-bottom: 20px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.08); /* Sombra suave */
+
+    max-height: 500px;          /* Altura máxima antes de activar scroll */
+    overflow-y: auto;           /* Scroll vertical */
+    -webkit-overflow-scrolling: touch; /* scroll fluido en iOS */
+    scrollbar-width: thin;
+    scrollbar-color: #c62828 #f1f1f1;
+    width: 100%;                /* Ocupa todo el ancho disponible */
 }
 
 /* Título */
@@ -568,12 +675,12 @@ nav img {
 
 /* Línea divisoria debajo de la fecha */
 .cronograma-card .fecha {
-    border-bottom: 4px solid #52007b; /* Rojo oscuro */
+    border-bottom: 4px solid #52007b; 
     padding-bottom: 6px;
     margin-bottom: 12px;
     display: block;
     font-weight: bold;
-    color: #d32f2f;             /* Resaltado en rojo */
+    color: #d32f2f;
 }
 
 /* Lista */
@@ -590,20 +697,68 @@ nav img {
 
 /* Exhibiciones destacadas */
 .cronograma-list li b {
-    color: #c62828; /* Rojo para resaltar los EXHIB */
+    color: #c62828;
+}
+
+/* Scrollbar para Chrome, Edge y Safari */
+.cronograma-card::-webkit-scrollbar {
+    width: 8px;
+}
+
+.cronograma-card::-webkit-scrollbar-thumb {
+    background-color: #c62828;
+    border-radius: 4px;
+}
+
+.cronograma-card::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* ==========================
+   Media Queries móviles
+========================== */
+@media (max-width: 768px) {
+    .cronograma-card {
+        padding: 15px;
+        max-height: 350px !important;   /* límite más bajo */
+        height: 350px !important;       /* 👈 fuerza altura */
+        overflow-y: scroll !important;  /* 👈 asegura scroll vertical */
+        flex-shrink: 0;                 /* evita que flexbox lo estire */
+        display: block;                 /* asegura que no se expanda */
+    }
+
+    .cronograma-card h3 { font-size: 16px; }
+    .cronograma-card h2 { font-size: 14px; }
+    .cronograma-card h4 { font-size: 13px; }
+
+    .cronograma-list {
+        padding-left: 14px;
+        margin: 0;
+    }
+
+    .cronograma-list li {
+        font-size: 12px;
+    }
 }
 
 /* ==========================
    Notas / caja derecha
 ========================== */
+.right-column {
+    max-width: 100%;
+    overflow-x: hidden; /* evita scroll horizontal en la columna */
+}
+
 .right-column .card {
     background: #ffffff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
+    margin: 0 auto 20px; /* centrado */
     text-align: center;
+    box-sizing: border-box;
+    max-width: 300px;   /* tope de ancho */
 }
 
 .right-column .card h3 {
@@ -614,178 +769,21 @@ nav img {
 
 .right-column .card video,
 .right-column .card img {
-    width: 100%;         /* Que ocupen el ancho completo */
-    height: auto;        /* Mantienen proporción */
-    border-radius: 6px;
-    margin-bottom: 12px; /* Separación entre video e imagen */
-}
-
-.right-column .card img.publi-img {
-    max-height: 300px;   /* Límite de altura si no quieres que sea muy grande */
-    object-fit: cover;   /* Recorta bien si la imagen es muy alta */
-}
-
-/* Fondo del modal formulario */
-.modal {
-  display: none; 
-  position: fixed;
-  z-index: 9999;
-  left: 0; top: 0;
-  width: 100%; height: 100%;
-  background-color: rgba(0,0,0,0.6);
-}
-
-/* Caja del modal formulario */
-.modal-content {
-  background: #fff;
-  margin: 10% auto;
-  padding: 20px;
-  border-radius: 8px;
-  width: 50%;
-  max-width: 600px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-/* Botón cerrar modal */
-.close {
-  float: right;
-  font-size: 22px;
-  cursor: pointer;
-}
-
-/* Fondo oscuro del modal imagen */
-.img-modal {
-  display: none;
-  position: fixed; 
-  z-index: 10000;   /* Más alto que el resto */
-  top: 0;
-  left: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
-  background-color: rgba(0,0,0,0.9);
-  justify-content: center;
-  align-items: center;
-}
-
-/* Imagen ampliada centrada */
-.img-modal img {
-  display: block;
-  margin: auto;
-  max-width: 250%;   /* ocupa casi todo el ancho */
-  max-height: 200vh; /* ocupa casi toda la altura de pantalla */
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.4);
-  object-fit: contain; /* asegura proporción */
-}
-
-/* Texto debajo de la imagen */
-#caption {
-  margin-top: 15px;
-  text-align: center;
-  color: #ddd;
-  font-size: 18px;
-}
-
-.modal-body {
-  text-align: center;
-  color: #fff;
-  max-width: 90%;
-  margin: auto;
-}
-
-.modal-texto {
-  margin-top: 15px;
-  text-align: center;
-  color: #ddd;
-}
-
-.modal-texto h2 {
-  font-size: 22px;
-  margin-bottom: 10px;
-  color: #fff;
-}
-
-.modal-texto p {
-  font-size: 16px;
-  line-height: 1.5;
-  color: #ccc;
-}
-
-/* Botón de cierre modal imagen */
-.img-modal .close {
-  position: absolute;
-  top: 20px;
-  right: 40px;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* ===== Modal de noticias ===== */
-.img-modal {
-    display: none; 
-    position: fixed;
-    z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    justify-content: center;   /* centrado horizontal */
-    align-items: center;       /* centrado vertical */
-    overflow-y: auto;          /* scroll si el contenido es largo */
-    padding: 30px 15px;
-}
-
-/* Contenedor interno */
-.img-modal .modal-body {
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    max-width: 900px;
-    width: 100%;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
-}
-
-/* Imagen */
-.img-modal img {
     max-width: 100%;
+    width: auto;         /* se ajusta al contenedor */
     height: auto;
     border-radius: 6px;
+    margin-bottom: 12px;
+    display: block;
+    box-sizing: border-box;
 }
 
-/* Texto */
-.modal-texto h2 {
-    font-size: 22px;
-    margin: 10px 0;
-    color: #222;
-}
-
-.modal-texto p {
-    font-size: 16px;
-    color: #555;
-    line-height: 1.5;
-}
-
-/* Botón cerrar */
-.img-modal .close {
-    position: absolute;
-    top: 20px;
-    right: 35px;
-    font-size: 32px;
-    font-weight: bold;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.3s;
-}
-.img-modal .close:hover {
-    color: #ff4444;
+/* Limitar ancho en pantallas grandes y centrar */
+.right-column .card img.publi-img,
+.right-column .card video {
+    max-width: 280px;
+    margin: 0 auto 12px;
+    display: block;
 }
 
 /* ==========================
@@ -848,4 +846,311 @@ nav img {
     .footer-column {
         flex: 1 1 100%;
     }
+}
+
+/* ==========================
+ 🌟 DISEÑO COMPLETO PARA MÓVIL
+========================== */
+@media (max-width: 768px) {
+
+  /* ======= NAVBAR ======= */
+  nav {
+    padding: 10px 20px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    background: linear-gradient(90deg, #d60000, #a80000);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  nav img {
+    height: 40px;
+    margin: 0;
+    border-radius: 6px;
+  }
+
+  nav .logo {
+    font-size: 1.2rem;
+    margin-left: 8px;
+  }
+
+  .menu-toggle {
+    display: block;
+    font-size: 1.8rem;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  nav ul {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: #a80000;
+    position: absolute;
+    top: 65px;
+    right: 15px;
+    width: 80%;
+    border-radius: 10px;
+    padding: 10px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    text-align: center;
+  }
+
+  nav ul.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+  }
+
+  nav ul li {
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  nav ul li a {
+    font-size: 1rem;
+    color: #fff;
+    width: 100%;
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  /* ======= CONTENEDOR PRINCIPAL ======= */
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .left-column,
+  .center-column,
+  .right-column {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    background: #fff;
+  }
+
+  /* ======= SECCIÓN DE NOTICIAS ======= */
+  .noticia-item {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+  }
+
+  .noticia-item img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+
+  .texto-noticia {
+    padding: 10px;
+  }
+
+  .texto-noticia h4 {
+    font-size: 1rem;
+    color: #b00000;
+    margin-bottom: 5px;
+  }
+
+  .texto-noticia p {
+    font-size: 0.85rem;
+    color: #333;
+  }
+
+  /* ======= TRANSMISIÓN ======= */
+  .live-screen {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .transmission-info {
+    padding: 10px 12px;
+  }
+
+  .transmission-info h2 {
+    font-size: 1.1rem;
+    color: #b00000;
+  }
+
+  .transmission-info p {
+    font-size: 0.9rem;
+    color: #333;
+  }
+
+  /* ======= CRONOGRAMA ======= */
+  .cronograma-card {
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    overflow: visible;
+    max-height: none;
+  }
+
+  .cronograma-card h3 {
+    font-size: 1rem;
+    color: #b00000;
+    margin-bottom: 8px;
+  }
+
+  .cronograma-list li {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  /* ======= PUBLICIDAD ======= */
+  .publicidad {
+    background: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .publicidad img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin: 10px 0;
+  }
+
+  #contador {
+    font-weight: bold;
+    color: #b00000;
+    font-size: 1rem;
+    margin-top: 5px;
+  }
+
+  /* ======= PIE DE PÁGINA ======= */
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    background: #b00000;
+    color: #fff;
+  }
+
+  .footer-column {
+    margin-bottom: 10px;
+  }
+
+  .footer a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 8px;
+  }
+
+  .social-icons a {
+    font-size: 1.2rem;
+    color: #fff;
+  }
+
+  .social-icons a:hover {
+    color: #ffcc00;
+  }
+}
+
+/* ==========================
+ 📱 EXTRAPEQUEÑOS (480px)
+========================== */
+@media (max-width: 480px) {
+  nav .logo {
+    font-size: 1rem;
+  }
+
+  .menu-toggle {
+    font-size: 1.6rem;
+  }
+
+  .texto-noticia h4 {
+    font-size: 0.95rem;
+  }
+
+  .texto-noticia p {
+    font-size: 0.8rem;
+  }
+
+  #contador {
+    font-size: 0.95rem;
+  }
+
+  .footer {
+    font-size: 0.85rem;
+  }
+}
+
+
+/* ======= NAV OCULTO AL INICIO ======= */
+nav ul {
+  display: none; /* oculto por defecto */
+}
+
+nav ul.active {
+  display: flex; /* se muestra al hacer clic */
+  flex-direction: column;
+  align-items: center;
+  background: #a80000;
+  position: absolute;
+  top: 65px;
+  right: 15px;
+  width: 80%;
+  border-radius: 10px;
+  padding: 10px 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.menu-toggle {
+  display: block; /* botón hamburguesa visible */
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* Para escritorio (mostrar menú normal) */
+@media (min-width: 769px) {
+  nav ul {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
 }

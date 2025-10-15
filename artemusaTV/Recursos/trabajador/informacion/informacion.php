@@ -1,10 +1,11 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header("Location: /Practicas/artemusaTV/app/views/login.php");
+    header("Location: /app/views/login.php");
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,25 +17,30 @@ if (!isset($_SESSION['usuario'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <nav>
-        <div style="display: flex; align-items: center; gap:10px;">
-            <span class="logo">ARTEMUSA TV</span>
-            <img src="../img/baner.jpg" alt="banner">
+    <nav class="navbar">
+        <div class="nav-left">
+            <img src="../img/nuevo logo011.png" alt="iconA" class="nav-banner">
+            <a href="../index.php" class="logo">ARTEMUSA TV</a>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
         </div>
 
-        <ul>
-            <li><a href="../index.php"></i> Inicio</a></li>
-            <li><a href="../pogramas/pogramas.php"></i> Programas</a></li>
-            <li><a href="../pogramasN/index.php"></i> Noticias</a></li>
-            <li><a href="informacion.php"></i> Información</a></li>
-            <li><a href="../contacto/contacto.php"></i> Contacto</a></li>
+        <ul class="nav-links" id="nav-links">
+            <li><a href="../index.php">Inicio</a></li>
+            <li><a href="../pogramasN/index.php">Noticias</a></li>
+            <li><a href="../candelaria/candelaria.php">Soy Candelaria</a></li>
+            <li><a href="../pogramas/pogramas.php">Programas</a></li>
+            <li><a href="informacion.php" class="active">Información</a></li>
+            <li><a href="../contacto/contacto.php">Contacto</a></li>
 
             <!-- Menú de usuario -->
             <li class="user-menu">
-                <a><i class="fa fa-user-circle"></i> <?= $_SESSION['usuario'] ?? 'Invitado' ?> ⬇</a>
-                <ul class="dropdown">
-                    <li><strong>Correo:</strong> <?= $_SESSION['correo'] ?? 'No definido' ?></li>
-                    <li><strong>Rol:</strong> <?= $_SESSION['rol'] ?? 'Usuario' ?></li>
+                <a href="#" id="user-toggle">
+                    <i class="fa fa-user-circle"></i>
+                    <?= htmlspecialchars($_SESSION['usuario'] ?? 'Invitado') ?> ⬇
+                </a>
+                <ul class="dropdown" id="user-dropdown">
+                    <li><strong>Correo:</strong> <?= htmlspecialchars($_SESSION['correo'] ?? 'No definido') ?></li>
+                    <li><strong>Rol:</strong> <?= htmlspecialchars($_SESSION['rol'] ?? 'viewer') ?></li>
                     <li><a href="../../../public/logout.php"><i class="fa fa-sign-out-alt"></i> Cerrar sesión</a></li>
                 </ul>
             </li>
@@ -47,9 +53,9 @@ if (!isset($_SESSION['usuario'])) {
         <section style="margin-bottom: 40px;">
             <h1>Sobre ArtemusaTV</h1>
             <p>
-                ArtemusaTV es un canal de televisión local de Puno que transmite noticias, 
-                programas culturales, entretenimiento y cobertura de eventos importantes. 
-                Nuestro compromiso es informar, educar y entretener a la comunidad puneña 
+                ArtemusaTV es un canal de televisión local de Puno que transmite noticias,
+                programas culturales, entretenimiento y cobertura de eventos importantes.
+                Nuestro compromiso es informar, educar y entretener a la comunidad puneña
                 con contenidos de calidad y producción local.
             </p>
         </section>
@@ -58,32 +64,23 @@ if (!isset($_SESSION['usuario'])) {
         <section style="margin-bottom: 40px;">
             <h2>Misión</h2>
             <p>
-                Brindar un servicio televisivo de calidad que refleje la identidad cultural 
+                Brindar un servicio televisivo de calidad que refleje la identidad cultural
                 de Puno y sirva como medio de comunicación accesible para todos.
             </p>
             <h2>Visión</h2>
             <p>
-                Convertirnos en el canal líder de la región sur del Perú, expandiendo 
+                Convertirnos en el canal líder de la región sur del Perú, expandiendo
                 nuestra señal a nivel nacional e internacional.
             </p>
         </section>
 
-        <!-- galeria de imagenes -->
+        <!-- Galería de Imágenes -->
         <section class="galeria">
             <h2>Galería de Imágenes</h2>
             <div class="contenedor-galeria">
-                <div class="imagen">
-                    <img src="../img/baner.jpg" alt="Foto 1" onclick="abrirModal(this)">
-                </div>
-                <div class="imagen">
-                    <img src="../img/ixon.jpg" alt="Foto 2" onclick="abrirModal(this)">
-                </div>
-                <div class="imagen">
-                    <img src="../img/" alt="Foto 3" onclick="abrirModal(this)">
-                </div>
-                <div class="imagen">
-                    <img src="imagenes/foto4.jpg" alt="Foto 4" onclick="abrirModal(this)">
-                </div>
+                <div class="imagen"><img src="../img/baner.jpg" alt="Foto 1" onclick="abrirModal(this)"></div>
+                <div class="imagen"><img src="../img/ixon.jpg" alt="Foto 2" onclick="abrirModal(this)"></div>
+                <div class="imagen"><img src="../img/nuevo logo011.png" alt="Foto 3" onclick="abrirModal(this)"></div>
             </div>
         </section>
 
@@ -94,7 +91,7 @@ if (!isset($_SESSION['usuario'])) {
             <div id="caption"></div>
         </div>
 
-        <!-- Ubicación con Google Maps -->
+        <!-- Ubicación -->
         <section style="margin-bottom: 40px;">
             <h2>Ubícanos</h2>
             <p>Nuestra sede se encuentra en Puno, Perú.</p>
@@ -102,11 +99,9 @@ if (!isset($_SESSION['usuario'])) {
                 <h3 style="color:#333; font-weight:bold;">📍 Encuéntranos en Puno</h3>
                 <iframe 
                     src="https://maps.google.com/maps?q=-15.840836579931862,-70.02654643428384&hl=es&z=18&t=k&output=embed" 
-                    width="100%" 
-                    height="300" 
+                    width="100%" height="300" 
                     style="border:0; border-radius:10px;" 
-                    allowfullscreen="" 
-                    loading="lazy">
+                    allowfullscreen loading="lazy">
                 </iframe>
             </div>
         </section>
@@ -114,7 +109,7 @@ if (!isset($_SESSION['usuario'])) {
         <!-- Redes Sociales -->
         <section style="margin-bottom: 40px;">
             <h2>Síguenos en Redes Sociales</h2>
-            <div style="display:flex; gap:20px; align-items:center;">
+            <div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
                 <a href="https://www.facebook.com/artemusatelevision" target="_blank">
                     <i class="fab fa-facebook fa-2x" style="color:#1877f2;"></i> Facebook
                 </a>
@@ -136,55 +131,56 @@ if (!isset($_SESSION['usuario'])) {
     </main>
 
     <script>
-    let indiceActual = 0;
-    let imagenes = [];
+        // === Menú hamburguesa ===
+        const toggle = document.getElementById("menu-toggle");
+        const links = document.getElementById("nav-links");
+        toggle.addEventListener("click", () => links.classList.toggle("active"));
 
-    function abrirModal(img) {
-        imagenes = document.querySelectorAll(".contenedor-galeria img");
-        indiceActual = Array.from(imagenes).indexOf(img);
+        // === Menú del usuario ===
+        const userToggle = document.getElementById("user-toggle");
+        const userDropdown = document.getElementById("user-dropdown");
 
-        mostrarImagen(indiceActual);
-        document.getElementById("modal").style.display = "block";
-    }
+        userToggle.addEventListener("click", (e) => {
+            e.preventDefault();
+            userDropdown.classList.toggle("show");
+        });
 
-    function mostrarImagen(indice) {
-        let img = imagenes[indice];
-        document.getElementById("imagen-ampliada").src = img.src;
-        document.getElementById("caption").innerHTML = img.alt;
-    }
+        document.addEventListener("click", (e) => {
+            if (!userToggle.contains(e.target) && !userDropdown.contains(e.target)) {
+                userDropdown.classList.remove("show");
+            }
+        });
 
-    function cerrarModal() {
-        document.getElementById("modal").style.display = "none";
-    }
+        // === Galería ===
+        let indiceActual = 0;
+        let imagenes = [];
 
-    function cambiarImagen(direccion) {
-        indiceActual += direccion;
-
-        if (indiceActual < 0) {
-            indiceActual = imagenes.length - 1;
-        } else if (indiceActual >= imagenes.length) {
-            indiceActual = 0;
+        function abrirModal(img) {
+            imagenes = document.querySelectorAll(".contenedor-galeria img");
+            indiceActual = Array.from(imagenes).indexOf(img);
+            mostrarImagen(indiceActual);
+            document.getElementById("modal").style.display = "block";
         }
 
-        mostrarImagen(indiceActual);
-    }
-
-    // Cerrar con la tecla ESC o clic fuera de la imagen
-    document.addEventListener("keydown", function(e) {
-        if (e.key === "Escape") {
-            cerrarModal();
-        } else if (e.key === "ArrowRight") {
-            cambiarImagen(1);
-        } else if (e.key === "ArrowLeft") {
-            cambiarImagen(-1);
+        function mostrarImagen(indice) {
+            let img = imagenes[indice];
+            document.getElementById("imagen-ampliada").src = img.src;
+            document.getElementById("caption").innerHTML = img.alt;
         }
-    });
 
-    document.getElementById("modal").addEventListener("click", function(e) {
-        if (e.target.id === "modal") {
-            cerrarModal();
+        function cerrarModal() {
+            document.getElementById("modal").style.display = "none";
         }
-    });
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") cerrarModal();
+            else if (e.key === "ArrowRight") indiceActual = (indiceActual + 1) % imagenes.length, mostrarImagen(indiceActual);
+            else if (e.key === "ArrowLeft") indiceActual = (indiceActual - 1 + imagenes.length) % imagenes.length, mostrarImagen(indiceActual);
+        });
+
+        document.getElementById("modal").addEventListener("click", (e) => {
+            if (e.target.id === "modal") cerrarModal();
+        });
     </script>
 </body>
 </html>

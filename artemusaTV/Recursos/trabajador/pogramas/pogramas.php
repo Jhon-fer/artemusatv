@@ -1,23 +1,27 @@
 <?php
-// Conexión a la base de datos
-$conexion = new mysqli("localhost", "root", "", "artemusatvphp");
+// ========================
+// SESIÓN Y SEGURIDAD
+// ========================
+session_start();
 
-// Validar conexión
+// Si no hay sesión activa, redirigir al login
+if (!isset($_SESSION['usuario'])) {
+    header("Location: /app/views/login.php");
+    exit();
+}
+
+// ========================
+// CONEXIÓN A LA BASE DE DATOS
+// ========================
+$conexion = new mysqli("localhost", "artemusa_artemusa", "7j4vV2mp5V", "artemusa_artemusatvphp");
+
 if ($conexion->connect_errno) {
     die("❌ Error de conexión: " . $conexion->connect_error);
 }
 
-session_start();
-
-// Verificar sesión
-if (!isset($_SESSION['usuario'])) {
-    header("Location: /Practicas/artemusaTV/app/views/login.php");
-    exit();
-}
-
-// ====================
-// CRUD: Añadir Programa
-// ====================
+// ========================
+// AÑADIR PROGRAMA
+// ========================
 if (isset($_POST['agregar'])) {
     $nombre = $conexion->real_escape_string($_POST['nombre']);
     $descripcion = $conexion->real_escape_string($_POST['descripcion']);
@@ -25,16 +29,15 @@ if (isset($_POST['agregar'])) {
     $hora_inicio = $conexion->real_escape_string($_POST['hora_inicio']);
     $hora_fin = $conexion->real_escape_string($_POST['hora_fin']);
 
-    $sql_insert = "INSERT INTO programas (nombre, descripcion, canal, hora_inicio, hora_fin)
-                   VALUES ('$nombre', '$descripcion', '$canal', '$hora_inicio', '$hora_fin')";
-    $conexion->query($sql_insert);
+    $conexion->query("INSERT INTO programas (nombre, descripcion, canal, hora_inicio, hora_fin)
+                      VALUES ('$nombre', '$descripcion', '$canal', '$hora_inicio', '$hora_fin')");
     header("Location: pogramas.php");
     exit();
 }
 
-// ====================
-// CRUD: Eliminar Programa
-// ====================
+// ========================
+// ELIMINAR PROGRAMA
+// ========================
 if (isset($_GET['eliminar'])) {
     $id = (int) $_GET['eliminar'];
     $conexion->query("DELETE FROM programas WHERE id = $id");
@@ -42,9 +45,9 @@ if (isset($_GET['eliminar'])) {
     exit();
 }
 
-// ====================
-// CRUD: Editar Programa
-// ====================
+// ========================
+// EDITAR PROGRAMA
+// ========================
 if (isset($_POST['editar'])) {
     $id = (int) $_POST['id'];
     $nombre = $conexion->real_escape_string($_POST['nombre']);
@@ -53,54 +56,59 @@ if (isset($_POST['editar'])) {
     $hora_inicio = $conexion->real_escape_string($_POST['hora_inicio']);
     $hora_fin = $conexion->real_escape_string($_POST['hora_fin']);
 
-    $sql_update = "UPDATE programas 
-                   SET nombre='$nombre', descripcion='$descripcion', canal='$canal', hora_inicio='$hora_inicio', hora_fin='$hora_fin' 
-                   WHERE id=$id";
-    $conexion->query($sql_update);
+    $conexion->query("UPDATE programas 
+                      SET nombre='$nombre', descripcion='$descripcion', canal='$canal', hora_inicio='$hora_inicio', hora_fin='$hora_fin'
+                      WHERE id=$id");
     header("Location: pogramas.php");
     exit();
 }
 
-// ====================
-// Consulta de programas
-// ====================
+// ========================
+// CONSULTAR PROGRAMAS
+// ========================
 $sql = "SELECT id, nombre, descripcion, canal,
                CONCAT(DATE_FORMAT(hora_inicio, '%h:%i %p'), ' - ', DATE_FORMAT(hora_fin, '%h:%i %p')) AS horario,
                hora_inicio, hora_fin
         FROM programas
         ORDER BY id ASC";
-
 $resultado = $conexion->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📺 Programación de Hoy</title>
     <link rel="stylesheet" href="css/styleP.css?v=1.0">
+    <link rel="stylesheet" href="../estiloCelular.css">
     <link rel="icon" href="../img/ixon.jpg">
 </head>
 <body>
-    <nav>
-        <div class="logo">
-            <img src="../img/baner.jpg" alt="Logo Artemusa TV">
-            <span>ARTEMUSA TV</span>
+    <!-- NAV -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <img src="../img/nuevo logo011.png" alt="iconA" class="nav-banner">
+            <a href="../index.php" class="logo">ARTEMUSA TV</a>
         </div>
-        <ul>
+
+        <!-- Botón hamburguesa -->
+        <button class="menu-toggle" id="menu-toggle">☰</button>
+
+        <!-- Enlaces -->
+        <ul class="nav-links" id="nav-links">
             <li><a href="../index.php">Inicio</a></li>
-            <li><a href="pogramas.php">Programas</a></li>
-            <li><a href="../pogramasN/index.php">Noticias</a></li>
-            <li><a href="../informacion/informacion.php">Informacion</a></li>
+            <li><a href="../pogramas/pogramas.php">Programas</a></li>
+            <li><a href="../candelaria/candelaria.php">Soy Candelaria</a></li>
+            <li><a href="../informacion/informacion.php">Información</a></li>
             <li><a href="../contacto/contacto.php">Contacto</a></li>
-            <!-- Menú de usuario -->
+
             <li class="user-menu">
-                <a>
-                    <?= $_SESSION['usuario'] ?? 'Invitado' ?> ⬇
-                </a>
+                <a><?= htmlspecialchars($_SESSION['usuario']) ?> ⬇</a>
                 <ul class="dropdown">
-                    <li>Correo: <?= $_SESSION['correo'] ?? '' ?></li>
-                    <li>Rol: <?= $_SESSION['rol'] ?? '' ?></li>
-                    <li><a href="../../../public/logout.php">Cerrar sesión</a></li>
+                    <li>Correo: <?= htmlspecialchars($_SESSION['correo'] ?? '') ?></li>
+                    <li>Rol: <?= htmlspecialchars($_SESSION['rol'] ?? '') ?></li>
+                    <li><a href="/public/logout.php">Cerrar sesión</a></li>
                 </ul>
             </li>
         </ul>
@@ -116,6 +124,7 @@ $resultado = $conexion->query($sql);
         <div class="modal-content">
             <span class="close" onclick="closeForm()">&times;</span>
             <h2>➕ Agregar Programa</h2>
+            
             <form method="POST">
                 <input type="text" name="nombre" placeholder="Nombre del programa" required>
                 <input type="text" name="descripcion" placeholder="Descripción" required>
@@ -227,6 +236,15 @@ $resultado = $conexion->query($sql);
             </ul>
         </div>
     </div>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
 
     <script>
     function openForm() {

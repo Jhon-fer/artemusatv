@@ -1,11 +1,11 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header("Location: /Practicas/artemusaTV/app/views/login.php");
+    header("Location: /app/views/login.php");
     exit();
 }
 
-$conexion = new mysqli("localhost", "root", "", "artemusatvphp");
+$conexion = new mysqli("localhost", "artemusa_artemusa", "7j4vV2mp5V", "artemusa_artemusatvphp");
 if ($conexion->connect_errno) {
     die("Error de conexión: " . $conexion->connect_error);
 }
@@ -43,7 +43,7 @@ while ($r = $respuestas_res->fetch_assoc()) {
     <!-- NAV -->
     <nav>
         <div class="nav-left">
-            <img src="../img/nuevo logo011.png" alt="iconA" class="nav-banner">
+            <img src="../img/nuevo_logo011.png" alt="iconA" class="nav-banner">
             <a href="../index.php" class="logo">ARTEMUSA TV</a>
         </div>
 
@@ -59,13 +59,11 @@ while ($r = $respuestas_res->fetch_assoc()) {
             <li><a href="contacto.php">Contacto</a></li>
             <!-- Menú de usuario -->
             <li class="user-menu">
-                <a>
-                    <?= $_SESSION['usuario'] ?? 'Invitado' ?> ⬇
-                </a>
+                <a><?= htmlspecialchars($_SESSION['usuario'] ?? 'viewer') ?> ⬇</a>
                 <ul class="dropdown">
-                    <li>Correo: <?= $_SESSION['correo'] ?? '' ?></li>
-                    <li>Rol: <?= $_SESSION['rol'] ?? '' ?></li>
-                    <li><a href="../../../public/logout.php">Cerrar sesión</a></li>
+                    <li>Correo: <?= htmlspecialchars($_SESSION['correo'] ?? '') ?></li>
+                    <li>Rol: <?= htmlspecialchars($_SESSION['rol'] ?? '') ?></li>
+                    <li><a href="/public/logout.php">Cerrar sesión</a></li>
                 </ul>
             </li>
         </ul>

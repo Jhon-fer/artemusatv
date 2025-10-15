@@ -1,5 +1,15 @@
 <?php
+// 💥 Destruye cualquier sesión anterior (evita volver "adelante" sin login)
 session_start();
+session_unset();
+session_destroy();
+
+// 🚫 Evita que el navegador use páginas guardadas del historial
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Pragma: no-cache");
+header("Expires: 0");
+
+// --- CONEXIÓN BASE DE DATOS ---
 require_once __DIR__ . "/../../config/database.php"; // aquí ya tienes $pdo
 
 // --- REGISTRO ---
@@ -10,17 +20,12 @@ if (isset($_POST['register'])) {
     $password_confirm = trim($_POST['password_confirm']);
 
     if (!empty($name) && !empty($email) && !empty($password)) {
-        
-        // Verificar confirmación
         if ($password !== $password_confirm) {
             echo "<script>alert('⚠️ Las contraseñas no coinciden');</script>";
             exit;
         }
 
-        // Hashear contraseña
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        // Rol por defecto
         $rol = "viewer";
 
         try {
@@ -51,17 +56,18 @@ if (isset($_POST['login'])) {
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($user) {
-        // ✅ Verificar hash de contraseña
         if (password_verify($password, $user['password'])) {
+            session_start();
+            session_regenerate_id(true); // 🔒 Evita reutilización de sesiones
             $_SESSION['usuario_id'] = $user['id'];
             $_SESSION['usuario']    = $user['nombre'];
             $_SESSION['rol']        = $user['rol'];
 
             // Redirigir según el rol
             if ($user['rol'] === 'trabajador') {
-                header("Location: /Practicas/artemusaTV/Recursos/trabajador/index.php");
+                header("Location: /Recursos/trabajador/index.php");
             } elseif ($user['rol'] === 'viewer') {
-                header("Location: /Practicas/artemusaTV/Recursos/viewer/index.php");
+                header("Location: /Recursos/viewer/index.php");
             } else {
                 header("Location: /Practicas/artemusaTV/panel.php");
             }
@@ -142,7 +148,7 @@ if (isset($_POST['login'])) {
                 </div>
 
                 <a href="recuperar/contrasenaOlvidada.php">¿Olvidó su contraseña?</a>
-                <a href="/Practicas/artemusaTV/Recursos/visitante/index.php">Seguir como visitante</a>
+                <a href="../../Recursos/visitante/index.php">Seguir como visitante</a>
                 <button type="submit" name="login">INICIAR SESIÓN</button>
             </form>
         </div>

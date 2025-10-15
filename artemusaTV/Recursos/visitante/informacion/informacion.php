@@ -1,11 +1,3 @@
-<?php
-// session_start();
-// if (!isset($_SESSION['usuario'])) {
-//     header("Location: /Practicas/artemusaTV/app/views/login.php");
-//     exit();
-// }
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,29 +9,23 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <nav>
-        <!-- Lado Izquierdo -->
+    <nav class="navbar">
         <div class="nav-left">
+            <img src="../img/nuevo_logo011.png" alt="iconA" class="nav-banner">
             <a href="../index.php" class="logo">ARTEMUSA TV</a>
-            <img src="../img/baner.jpg" alt="iconA" class="nav-banner">
-        </div>
-
-        <!-- Lado Derecho -->
-        <div class="nav-right">
-            <!-- Botón hamburguesa -->
+            <!-- 🔹 mueve el botón aquí -->
             <button class="menu-toggle" id="menu-toggle">☰</button>
-
-            <!-- Menú -->
-            <ul id="nav-links">
-                <li><a href="../index.php">Inicio</a></li>
-                <li><a href="../pogramasN/index.php">Noticias</a></li>
-                <li><a href="../candelaria/candelaria.php">Soy Candelaria</a></li>
-                <li><a href="../pogramas/pogramas.php">Programas</a></li>
-                <li><a href="informacion.php">Información</a></li>
-                <li><a href="../contacto/contacto.php">Contacto</a></li>
-                <li><a href="/Practicas/artemusaTV/app/views/login.php">Iniciar sesión</a></li>
-            </ul>
         </div>
+
+        <ul class="nav-links" id="nav-links">
+            <li><a href="../index.php">Inicio</a></li>
+            <li><a href="../pogramasN/index.php">Noticias</a></li>
+            <li><a href="../candelaria/candelaria.php">Soy Candelaria</a></li>
+            <li><a href="../pogramas/pogramas.php">Programas</a></li>
+            <li><a href="informacion.php">Información</a></li>
+            <li><a href="../contacto/contacto.php">Contacto</a></li>
+            <li><a href="app/views/login.php">Iniciar sesión</a></li>
+        </ul>
     </nav>
 
     <main style="padding: 30px; max-width: 1200px; margin: auto; color: #333;">
@@ -137,6 +123,16 @@
     </main>
 
     <script>
+        // Script para abrir/cerrar menú en móvil
+        const toggle = document.getElementById('menu-toggle');
+        const links = document.getElementById('nav-links');
+
+        toggle.addEventListener('click', () => {
+            links.classList.toggle('active');
+        });
+    </script>
+
+    <script>
     let indiceActual = 0;
     let imagenes = [];
 
@@ -188,12 +184,50 @@
     });
     </script>
     <script>
-        // Script para abrir/cerrar menú en móvil
+        // Menú móvil
         const toggle = document.getElementById('menu-toggle');
         const links = document.getElementById('nav-links');
 
         toggle.addEventListener('click', () => {
             links.classList.toggle('active');
+        });
+
+        // Galería modal
+        let indiceActual = 0;
+        let imagenes = [];
+
+        function abrirModal(img) {
+            imagenes = document.querySelectorAll(".contenedor-galeria img");
+            indiceActual = Array.from(imagenes).indexOf(img);
+            mostrarImagen(indiceActual);
+            document.getElementById("modal").style.display = "block";
+        }
+
+        function mostrarImagen(indice) {
+            let img = imagenes[indice];
+            document.getElementById("imagen-ampliada").src = img.src;
+            document.getElementById("caption").innerHTML = img.alt;
+        }
+
+        function cerrarModal() {
+            document.getElementById("modal").style.display = "none";
+        }
+
+        function cambiarImagen(direccion) {
+            indiceActual += direccion;
+            if (indiceActual < 0) indiceActual = imagenes.length - 1;
+            else if (indiceActual >= imagenes.length) indiceActual = 0;
+            mostrarImagen(indiceActual);
+        }
+
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape") cerrarModal();
+            else if (e.key === "ArrowRight") cambiarImagen(1);
+            else if (e.key === "ArrowLeft") cambiarImagen(-1);
+        });
+
+        document.getElementById("modal").addEventListener("click", (e) => {
+            if (e.target.id === "modal") cerrarModal();
         });
     </script>
 </body>

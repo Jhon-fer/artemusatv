@@ -1,9 +1,28 @@
 <?php
 session_start();
+
+// 🚫 Evitar cargar contenido guardado en caché o historial
+header("Expires: Tue, 01 Jan 2000 00:00:00 GMT");
+header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+
+// 🚷 Si no hay sesión, redirige al login
 if (!isset($_SESSION['usuario'])) {
-    header("Location: /Practicas/artemusaTV/app/views/login.php");
+    // Evita que el navegador use la página previa del historial
+    echo "<script>
+        window.location.replace('/app/views/login.php');
+    </script>";
     exit();
 }
+
+// ⚡ Refuerza seguridad: evita reutilización de sesiones viejas
+session_regenerate_id(true);
+
+// =======================
+// 🔗 Canal ARTEMUSA TV HD
+// =======================
 $m3uUrl = "http://64.76.204.10:25461/get.php?username=puno&password=puno&type=m3u&output=hls";
 $m3uContent = @file_get_contents($m3uUrl);
 
@@ -13,6 +32,7 @@ $canalUrl = "";
 if ($m3uContent !== false) {
     $lineas = explode("\n", $m3uContent);
     $nombre = "";
+
     foreach ($lineas as $linea) {
         $linea = trim($linea);
         if (strpos($linea, "#EXTINF:") === 0) {
@@ -26,6 +46,10 @@ if ($m3uContent !== false) {
         }
     }
 }
+
+// 📅 Fecha objetivo: lunes 2 de febrero de 2026 a las 00:00:00
+$fechaObjetivo = "2026-02-02 00:00:00";
+$timestamp = strtotime($fechaObjetivo);
 ?>
 
 <!DOCTYPE html>
@@ -33,7 +57,7 @@ if ($m3uContent !== false) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/ixon.jpg">||||||||||||||
+    <link rel="icon" href="img/ixon.jpg">
     <link rel="stylesheet" href="css/style.css?v=1.0">
     <link rel="stylesheet" href="../estiloCelular.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -164,9 +188,9 @@ if ($m3uContent !== false) {
     </style>
 </head>
 <body>
-    <nav>
+    <nav class="navbar">
         <div class="nav-left">
-            <img src="img/nuevo logo011.png" alt="iconA" class="nav-banner">
+            <img src="img/nuevo_logo011.png" alt="iconA" class="nav-banner">
             <a href="index.php" class="logo">ARTEMUSA TV</a>
         </div>
 
@@ -187,8 +211,8 @@ if ($m3uContent !== false) {
                     <?= $_SESSION['usuario'] ?? 'Invitado' ?> ⬇
                 </a>
                 <ul class="dropdown">
-                    <li>Correo: <?= $_SESSION['correo'] ?? '' ?></li>
-                    <li>Rol: <?= $_SESSION['rol'] ?? '' ?></li>
+                    <li>Correo: <?= htmlspecialchars($_SESSION['correo'] ?? '') ?></li>
+                    <li>Rol: <?= htmlspecialchars($_SESSION['rol'] ?? '') ?></li>
                     <li><a href="../../public/logout.php">Cerrar sesión</a></li>
                 </ul>
             </li>
@@ -324,7 +348,7 @@ if ($m3uContent !== false) {
             <div class="side-box">
                 <h3>Mis notas</h3>
                 <?php
-                $conexion = new mysqli("localhost", "root", "", "artemusatvphp");
+                $conexion = new mysqli("localhost", "artemusa_artemusa", "7j4vV2mp5V", "artemusa_artemusatvphp");
                 if ($conexion->connect_errno) {
                     die("Error de conexión: " . $conexion->connect_error);
                 }
@@ -365,31 +389,96 @@ if ($m3uContent !== false) {
                 $conexion->close();
                 ?>
             </div>
+
+            <div class="card publicidad">
+                <h3>📢 Soy Candelaria</h3>
+                <a href="candelaria/candelaria.php"><img src="../publicidad/candelaria.jpg" alt="candelaria"></a>
+                <h3>⏳ Contador hasta el inicio de la Candelaria 2026</h3>
+                <div id="contador"></div>
+
+                <h3>📌 Publicite aquí (cel: 957627791):</h3>
+                <div class="ads">
+                    <a href="https://www.facebook.com/conectocompany/?locale=es_LA" target="_blank"><img src="../publicidad/conecto.png" alt="conecto"></a>
+                    <a href="https://cultural.edu.pe/puno/" target="_blank"><img src="../publicidad/cultural.jpg" alt="cultural"></a>
+                    <a href="https://www.facebook.com/DiresaPunoOficial?locale=es_LA" target="_blank"><img src="../publicidad/vacuna.jpg" alt="vacuna"></a>
+                </div>
+            </div>
         </div>
     </div>
 
-   <!-- Pie de página -->
-    <div class="footer">
-        <div class="footer-column">
-            <p>© 2025 ARTEMUSA TV<br>Todos los derechos reservados</p>
+    <!-- Pie de página -->
+    <footer class="footer">
+        <div class="footer-container">
+        
+            <div class="footer-column">
+                <h4>ARTEMUSA TV</h4>
+                <p>© 2025 ARTEMUSA TV<br>Todos los derechos reservados</p>
+                <p class="footer-slogan">Inspirando con arte y cultura.</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Contáctanos</h4>
+                <p><i class="fas fa-envelope"></i> 
+                    <a href="mailto:artemusatv@gmail.com">artemusatv@gmail.com</a></p>
+                <p><i class="fas fa-phone"></i> 
+                    <a href="tel:+51997334477">997 334 477</a></p>
+                <p><i class="fas fa-map-marker-alt"></i> 
+                    <a href="https://maps.app.goo.gl/RMpHgF72i2AsMyXf6" target="_blank" rel="noopener noreferrer">Ubicación</a></p>
+                <p><i class="fas fa-clock"></i> Lunes a Viernes 08:00 - 20:00</p>
+            </div>
+
+            <div class="footer-column">
+                <h4>Síguenos</h4>
+                <ul class="social-icons">
+                    <li><a href="https://www.facebook.com/artemusatelevision" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+                    <li><a href="https://www.youtube.com/@artemusatelevision" target="_blank"><i class="fab fa-youtube"></i></a></li>
+                    <li><a href="https://www.tiktok.com/@artemusa_tv" target="_blank"><i class="fab fa-tiktok"></i></a></li>
+                </ul>
+            </div>
+
         </div>
-        <div class="footer-column">
-            <p>Contacto: <a href="mailto:contacto@artemusatv.pe">contacto@artemusatv.pe</a></p>
-            <p>Tel: <a href="tel:123456789">123-456-789</a></p>
-            <p>Ubicación: <a href="https://www.google.com/maps/place/Jr.+Cutimbo+285,+Puno,+Perú" target="_blank">Jr. Cutimbo Nro. 285, Barrio Chacarrilla Alta, Puno, Perú</a></p>
-            <p>Horario: Lunes a Viernes 08:00 - 20:00</p>
+
+        <div class="footer-bottom">
+            <p>Desarrollado por <strong>ARTEMUSA Tech</strong></p>
         </div>
-        <div class="footer-column">
-            <h4>Síguenos</h4>
-            <ul class="social-icons">
-                <li><a href="https://www.facebook.com/artemusatelevision" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a></li>
-                <li><a href="https://www.youtube.com/@artemusatelevision" target="_blank"><i class="fab fa-youtube"></i> YouTube</a></li>
-                <li><a href="https://www.tiktok.com/@artemusa_tv" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a></li>
-            </ul>
-        </div>
-    </div>
+    </footer>
 
     <script src="js/java.js"></script>
+    <script>
+        // Script para abrir/cerrar menú en móvil
+        const toggle = document.getElementById('menu-toggle');
+        const links = document.getElementById('nav-links');
+
+        toggle.addEventListener('click', () => {
+            links.classList.toggle('active');
+        });
+    </script>
+    <script>
+        // 📌 Obtener la fecha objetivo desde PHP
+        const fechaObjetivo = new Date(<?php echo $timestamp * 1000; ?>);
+
+        function actualizarContador() {
+            const ahora = new Date();
+            const diferencia = fechaObjetivo - ahora;
+
+            if (diferencia <= 0) {
+                document.getElementById("contador").innerHTML = "¡Ha llegado el día!";
+                return;
+            }
+
+            const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+            const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+            const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+            document.getElementById("contador").innerHTML = 
+                dias + "d " + horas + "h " + minutos + "m " + segundos + "s ";
+        }
+
+        // Actualizar cada segundo
+        setInterval(actualizarContador, 1000);
+        actualizarContador();
+    </script>
     <!-- Pie de página <script src="js/noticia-carrucel.js"></script>-->
     <!-- <script src="js/pogramacion.js"></script>-->
     <!-- Script de TikTok (necesario una sola vez en la página) -->

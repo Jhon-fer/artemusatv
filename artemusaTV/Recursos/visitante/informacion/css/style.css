@@ -1,229 +1,171 @@
 /* ==========================
-   Reset y fuentes
+   Reset
 ========================== */
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #fff;
-    color: #222;
-    line-height: 1.6;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fff;
 }
 
 /* ==========================
-   Barra de Navegación
+   NAVBAR
 ========================== */
-nav {
-    background: linear-gradient(90deg, #d60000, #a80000);
-    border-bottom: 2px solid #900000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 12px 30px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-    position: relative;  /* 👈 necesario para el ::after */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.navbar {
+  background-color: #b00000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 40px; /* más espacio interno */
+  height: 80px;        /* navbar más alta */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 
-/* Franja inferior */
-nav::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 8px;           /* 👈 grosor de la franja */
-    background-color: #52007b; /* 👈 color morado */
+/* Franja inferior morada */
+.navbar::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-color: #52007b;
 }
 
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
+/* Logo e imagen */
 .nav-left {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    flex-wrap: nowrap;      /* 🔹 evita salto de línea */
-    min-width: 0;           /* 🔹 permite que el contenido se reduzca */
+  display: flex;
+  align-items: center;
+  gap: 10;
 }
 
-.nav-left .logo {
-    white-space: nowrap;    /* 🔹 no permite que ARTEMUSA TV se parta */
-    font-size: 1.4rem;
+.nav-banner {
+  height: 45px;
+  border-radius: 6px;
+  margin-right: 10px;
 }
 
-.nav-right {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* separa el botón del menú */
-}
-
-.nav-left img {
-    max-height: 40px;
-    max-width: 80px;        /* 🔹 evita que la imagen empuje todo */
-    height: auto;
-    width: auto;
-}
-
-nav .logo {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #fff;
-    letter-spacing: 1px;
-    transition: color 0.3s;
-}
-
-nav .logo:hover {
-    color: #ffcc00;
-}
-
-nav img {
-    height: 45px;
-    margin-left: 15px;
-    border-radius: 8px;
-}
-
-/* Lista de navegación */
-nav ul {
-    list-style: none;
-    display: flex;
-    align-items: center;
-}
-
-nav ul li {
-    margin-left: 25px;
-    display: flex;
-    align-items: center;
-    position: relative;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    padding: 6px 10px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-}
-
-nav ul li a:hover {
-    color: #333;
-    background: #ffcc00;
+.logo {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #fff;
+  text-decoration: none;
 }
 
 /* ==========================
-   Menú Usuario
+   Lista de navegación
 ========================== */
-.user-menu > a {
-    font-weight: bold;
-    color: #ffcc00;
-    cursor: pointer;
+.nav-links {
+  list-style: none;
+  display: flex;
+  align-items: center;
 }
 
-/* Dropdown */
-.user-menu .dropdown {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: #fff;
-    border-radius: 6px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    min-width: 200px;
-    padding: 8px 0;
-    z-index: 999;
+.nav-links li {
+  margin-left: 20px;
 }
 
-.user-menu .dropdown li {
-    margin: 0;
-    padding: 10px 15px;
-    color: #333;
-    font-size: 0.9rem;
-    display: block;
+.nav-links a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 6px 10px;
+  border-radius: 5px;
 }
 
-.user-menu .dropdown li a {
-    color: #d60000;
-    padding: 8px 12px;
-    display: block;
-    border-radius: 5px;
-}
-
-.user-menu .dropdown li a:hover {
-    background: #ffcc00;
-    color: #333;
-}
-
-/* Mostrar el dropdown al pasar */
-.user-menu:hover .dropdown {
-    display: block;
+.nav-links a:hover {
+  background-color: #ffcc00;
+  color: #b00000;
 }
 
 /* ==========================
-   Botón Hamburguesa
+   Botón hamburguesa
 ========================== */
 .menu-toggle {
-    display: none;
-    font-size: 28px;
-    background: none;
-    border: none;
-    color: #fff;
-    cursor: pointer;
+  display: none;
+  font-size: 1.8rem;
+  color: #fff;
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px; /* 🔹 separa el botón del texto */
+  align-self: center; /* 🔹 lo centra verticalmente */
 }
 
 /* ==========================
-   Vista móvil
+   Responsive
 ========================== */
 @media (max-width: 768px) {
-    nav ul {
-        display: none; /* Oculto por defecto */
-        flex-direction: column;
-        background: #a80000;
-        position: absolute;
-        top: 70px;
-        right: 20px;
-        padding: 15px;
-        border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        width: 200px;
-        text-align: right;
-    }
+  .menu-toggle {
+    display: block;
+  }
 
-    nav ul.active {
-        display: flex; /* Se muestra cuando el toggle está activo */
-    }
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #b00000;
+    position: absolute;
+    top: 65px;
+    right: 15px;
+    border-radius: 10px;
+    width: 200px;
+    padding: 15px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+    animation: slideDown 0.3s ease forwards;
+  }
 
-    nav ul li {
-        margin: 10px 0;
-    }
+  .nav-links.active {
+    display: flex;
+  }
 
-    .nav-left {
-        flex: 1;
-        justify-content: flex-start;
-    }
+  .nav-links li {
+    text-align: center;
+    padding: 8px 0;
+  }
 
-    .nav-right {
-        flex-shrink: 0;
-    }
+  .nav-links a {
+    width: 100%;
+    display: block;
+  }
 
-    .menu-toggle {
-        display: block;
-        margin-left: auto;   /* 🔹 se queda a la derecha */
-    }
+  /* Mantiene todo en una línea horizontal */
+  .navbar {
+    flex-wrap: nowrap; /* 🔹 evita que el botón baje */
+    justify-content: space-between; /* 🔹 logo a la izquierda, botón a la derecha */
+  }
+
+  /* Asegura que el logo y texto estén alineados correctamente */
+  .nav-left {
+    flex: 1; /* 🔹 permite que el logo use el espacio necesario */
+    display: flex;
+    align-items: center;
+  }
+
+  /* Ajusta el botón hamburguesa */
+  .menu-toggle {
+    display: block;
+    margin-left: auto; /* 🔹 empuja el botón al extremo derecho */
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ==========================
@@ -327,7 +269,15 @@ section p {
 /* ==========================
    Redes Sociales
 ========================== */
-section a {
+/* Redes Sociales - Desktop */
+section .redes {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    justify-content: flex-start;
+}
+
+section .redes a {
     text-decoration: none;
     font-weight: bold;
     display: flex;
@@ -336,8 +286,23 @@ section a {
     transition: transform 0.2s ease;
 }
 
-section a:hover {
+section .redes a:hover {
     transform: scale(1.1);
+}
+
+/* Redes Sociales - Mobile */
+@media (max-width: 768px) {
+    section .redes {
+        flex-direction: column; /* vertical */
+        align-items: center;    /* centrado */
+        gap: 10px;              /* espacio entre enlaces */
+        margin-top: 15px;
+    }
+
+    section .redes a {
+        font-size: 1rem;        /* ajustar tamaño de texto en móvil */
+        justify-content: center;
+    }
 }
 
 /* ==========================

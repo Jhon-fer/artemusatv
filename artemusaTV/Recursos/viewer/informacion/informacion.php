@@ -1,10 +1,11 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header("Location: /Practicas/artemusaTV/app/views/login.php");
+    header("Location: /app/views/login.php");
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,29 +17,30 @@ if (!isset($_SESSION['usuario'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
-    <nav>
+    <nav class="navbar">
         <div class="nav-left">
-            <img src="../img/nuevo logo011.png" alt="iconA" class="nav-banner">
+            <img src="../img/nuevo_logo011.png" alt="iconA" class="nav-banner">
             <a href="../index.php" class="logo">ARTEMUSA TV</a>
+            <button class="menu-toggle" id="menu-toggle">☰</button>
         </div>
 
-        <!-- Botón hamburguesa -->
-        <button class="menu-toggle" id="menu-toggle">☰</button>
-
         <ul class="nav-links" id="nav-links">
-            <li><a href="../index.php"></i> Inicio</a></li>
-            <li><a href="../pogramasN/index.php"></i> Noticias</a></li>
-            <li><a href="../candelaria/candelaria.php"></i> Soy Candelaria</a></li>
-            <li><a href="../pogramas/pogramas.php"></i> Programas</a></li>
-            <li><a href="informacion.php"></i> Información</a></li>
-            <li><a href="../contacto/contacto.php"></i> Contacto</a></li>
+            <li><a href="../index.php">Inicio</a></li>
+            <li><a href="../pogramasN/index.php">Noticias</a></li>
+            <li><a href="../candelaria/candelaria.php">Soy Candelaria</a></li>
+            <li><a href="../pogramas/pogramas.php">Programas</a></li>
+            <li><a href="informacion.php">Información</a></li>
+            <li><a href="../contacto/contacto.php">Contacto</a></li>
 
             <!-- Menú de usuario -->
             <li class="user-menu">
-                <a><i class="fa fa-user-circle"></i> <?= $_SESSION['usuario'] ?? 'Invitado' ?> ⬇</a>
-                <ul class="dropdown">
-                    <li><strong>Correo:</strong> <?= $_SESSION['correo'] ?? 'No definido' ?></li>
-                    <li><strong>Rol:</strong> <?= $_SESSION['rol'] ?? 'Usuario' ?></li>
+                <a href="#" id="user-toggle">
+                    <i class="fa fa-user-circle"></i>
+                    <?= htmlspecialchars($_SESSION['usuario'] ?? 'Invitado') ?> ⬇
+                </a>
+                <ul class="dropdown" id="user-dropdown">
+                    <li><strong>Correo:</strong> <?= htmlspecialchars($_SESSION['correo'] ?? 'No definido') ?></li>
+                    <li><strong>Rol:</strong> <?= htmlspecialchars($_SESSION['rol'] ?? 'viewer') ?></li>
                     <li><a href="../../../public/logout.php"><i class="fa fa-sign-out-alt"></i> Cerrar sesión</a></li>
                 </ul>
             </li>
@@ -138,6 +140,31 @@ if (!isset($_SESSION['usuario'])) {
             <p><i class="fa fa-envelope"></i> Correo: contacto@artemusatv.com</p>
         </section>
     </main>
+
+    <script>
+        // === Menú hamburguesa ===
+        const toggle = document.getElementById("menu-toggle");
+        const links = document.getElementById("nav-links");
+        toggle.addEventListener("click", () => {
+            links.classList.toggle("active");
+        });
+
+        // === Menú del usuario ===
+        const userToggle = document.getElementById("user-toggle");
+        const userDropdown = document.getElementById("user-dropdown");
+
+        userToggle.addEventListener("click", (e) => {
+            e.preventDefault();
+            userDropdown.classList.toggle("show");
+        });
+
+        // Cierra el menú al hacer clic fuera
+        document.addEventListener("click", (e) => {
+            if (!userToggle.contains(e.target) && !userDropdown.contains(e.target)) {
+            userDropdown.classList.remove("show");
+            }
+        });
+    </script>
 
     <script>
     let indiceActual = 0;

@@ -1,10 +1,11 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header("Location: /Practicas/artemusaTV/app/views/login.php");
+    header("Location: ../../../app/views/login.php");
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -154,8 +155,8 @@ if (!isset($_SESSION['usuario'])) {
     <!-- NAV -->
     <nav class="navbar">
          <div class="nav-left">
-            <img src="..\img\nuevo logo011.png" alt="iconA" class="nav-banner">
-            <a href="..index.php" class="logo">ARTEMUSA TV</a>
+            <img src="../img/nuevo_logo011.png" alt="iconA" class="nav-banner">
+            <a href="../index.php" class="logo">ARTEMUSA TV</a>
         </div>
 
         <!-- Botón hamburguesa -->
@@ -163,16 +164,17 @@ if (!isset($_SESSION['usuario'])) {
 
         <ul class="nav-links" id="nav-links">
             <li><a href="../index.php">Inicio</a></li>
-            <li><a href="../pogramas/pogramas.php">Programas</a></li>
             <li><a href="../pogramasN/index.php">Noticias</a></li>
+            <li><a href="../candelaria/candelaria.php">Soy Candelaria</a></li>
+            <li><a href="../pogramas/pogramas.php">Programas</a></li>
             <li><a href="../informacion/informacion.php">Informacion</a></li>
             <li><a href="../contacto/contacto.php">Contacto</a></li>
             <!-- Menú de usuario -->
             <li class="user-menu">
                 <a><?= $_SESSION['usuario'] ?? 'Invitado' ?> ⬇</a>
                 <ul class="dropdown">
-                    <li>Correo: <?= $_SESSION['correo'] ?? '' ?></li>
-                    <li>Rol: <?= $_SESSION['rol'] ?? '' ?></li>
+                    <li>Correo: <?= htmlspecialchars($_SESSION['correo'] ?? '') ?></li>
+                    <li>Rol: <?= htmlspecialchars($_SESSION['rol'] ?? '') ?></li>
                     <li><a href="../../../public/logout.php">Cerrar sesión</a></li>
                 </ul>
             </li>
@@ -309,6 +311,15 @@ if (!isset($_SESSION['usuario'])) {
             </ul>
         </div>
     </div>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const navLinks = document.getElementById('nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
 
     <script>
     async function cargarNoticias() {

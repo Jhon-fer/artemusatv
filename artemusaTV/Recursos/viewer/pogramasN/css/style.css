@@ -44,6 +44,18 @@ nav {
     top: 0;
     z-index: 1000;
     box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    position: relative;  /* 👈 necesario para el ::after */
+}
+
+/* Franja inferior */
+nav::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;           /* 👈 grosor de la franja */
+    background-color: #52007b; /* 👈 color morado */
 }
 
 nav .logo {
@@ -428,7 +440,7 @@ nav ul li a:hover {
     background-color: #b30000; /* rojo fuerte */
     color: #fff;               /* texto blanco */
     padding: 20px;
-    border-top: 8px solid #000; /* franja negra superior */
+    border-top: 8px solid #52007b; /* franja negra superior */
     margin-top: 20px;
     font-size: 0.9rem;
 }

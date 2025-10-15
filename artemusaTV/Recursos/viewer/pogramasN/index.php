@@ -1,10 +1,11 @@
 <?php
 session_start();
 if (!isset($_SESSION['usuario'])) {
-    header("Location: /Practicas/artemusaTV/app/views/login.php");
+    header("Location: ../../../app/views/login.php");
     exit();
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,10 +17,10 @@ if (!isset($_SESSION['usuario'])) {
     <title>ARTEMUSA TV - Noticias</title>
 </head>
 <body>
-    <nav>
+    <nav class="navbar">
         <div class="nav-left">
+            <img src="../img/nuevo_logo011.png" alt="iconA" class="nav-banner">
             <a href="../index.php" class="logo">ARTEMUSA TV</a>
-            <img src="../img/baner.jpg" alt="iconA" class="nav-banner">
         </div>
 
         <!-- Botón hamburguesa -->
@@ -27,7 +28,7 @@ if (!isset($_SESSION['usuario'])) {
 
         <ul class="nav-links" id="nav-links">
             <li><a href="../index.php">Inicio</a></li>
-            <li><a href="pogramasN/index.php">Noticias</a></li>
+            <li><a href="index.php">Noticias</a></li>
             <li><a href="../candelaria/candelaria.php">Soy Candelaria</a></li>
             <li><a href="../pogramas/pogramas.php">Programas</a></li>
             <li><a href="../informacion/informacion.php">Informacion</a></li>
@@ -39,8 +40,8 @@ if (!isset($_SESSION['usuario'])) {
                     <?= $_SESSION['usuario'] ?? 'Invitado' ?> ⬇
                 </a>
                 <ul class="dropdown">
-                    <li>Correo: <?= $_SESSION['correo'] ?? '' ?></li>
-                    <li>Rol: <?= $_SESSION['rol'] ?? '' ?></li>
+                    <li>Correo: <?= htmlspecialchars($_SESSION['correo'] ?? '') ?></li>
+                    <li>Rol: <?= htmlspecialchars($_SESSION['rol'] ?? '') ?></li>
                     <li><a href="../../../public/logout.php">Cerrar sesión</a></li>
                 </ul>
             </li>
@@ -160,6 +161,15 @@ if (!isset($_SESSION['usuario'])) {
                 }
             }
         }
+    </script>
+    <script>
+        // Script para abrir/cerrar menú en móvil
+        const toggle = document.getElementById('menu-toggle');
+        const links = document.getElementById('nav-links');
+
+        toggle.addEventListener('click', () => {
+            links.classList.toggle('active');
+        });
     </script>
 </body>
 </html>

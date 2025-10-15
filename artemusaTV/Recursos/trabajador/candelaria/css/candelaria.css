@@ -22,8 +22,8 @@ nav {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 15px 30px;
-    height: 70px; 
+    padding: 12px 40px; /* más espacio interno */
+    height: 80px;        /* navbar más alta */
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -96,16 +96,24 @@ nav img {
 }
 
 /* ==========================
-   Menú Usuario
+   Menú Usuario (solo clic)
 ========================== */
+.user-menu {
+    position: relative;
+}
+
 .user-menu > a {
     font-weight: bold;
     color: #ffcc00;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
+/* 🔒 Oculto por defecto */
 .user-menu .dropdown {
-    display: none;
+    display: none !important; /* 👈 fuerza que esté oculto */
     position: absolute;
     top: 100%;
     right: 0;
@@ -117,12 +125,22 @@ nav img {
     z-index: 999;
 }
 
+/* 🔓 Solo visible cuando tiene la clase .active */
+.user-menu.active .dropdown {
+    display: block !important; /* 👈 fuerza que se muestre al hacer clic */
+}
+
+/* Evita que :hover interfiera */
+.user-menu:hover .dropdown {
+    display: none !important; /* 👈 desactiva completamente el hover */
+}
+
+/* Estilo interno */
 .user-menu .dropdown li {
     margin: 0;
     padding: 10px 15px;
     color: #333;
     font-size: 0.9rem;
-    display: block;
 }
 
 .user-menu .dropdown li a {
@@ -137,58 +155,125 @@ nav img {
     color: #333;
 }
 
-.user-menu:hover .dropdown {
-    display: block;
+/* Responsive */
+@media (max-width: 768px) {
+    .user-menu .dropdown {
+        position: static;
+        background: #b00000;
+        box-shadow: none;
+        border-radius: 0;
+        padding: 5px 0;
+    }
+
+    .user-menu .dropdown li {
+        color: #fff;
+    }
+
+    .user-menu .dropdown li a {
+        color: #ffcc00;
+    }
 }
 
 /* ==========================
-   Menú hamburguesa
+   Menú hamburguesa (responsive)
 ========================== */
 .menu-toggle {
-    display: none; /* oculto en escritorio */
+    display: none;
     font-size: 1.8rem;
-    color: #fff;
+    color: #333;
     cursor: pointer;
-    background: none;
-    border: none;
 }
 
-/* SOLO en escritorio */
-@media (min-width: 769px) {
-    .nav-links {
-        display: flex; /* visible en PC */
-    }
-}
-
-/* SOLO en móvil */
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;  /* 👈 oculto al cargar */
+    nav ul {
         flex-direction: column;
-        background: #a80000;
+        display: none;
+        background: #fff;
         position: absolute;
-        top: 60px;
-        right: 15px;
+        top: 65px;
+        right: 20px;
         width: 220px;
-        padding: 15px 0;
         border-radius: 8px;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-        animation: slideDown 0.3s ease;
+        border: 1px solid #ddd;
+        padding: 15px 0;
     }
 
-    .nav-links.active {
-        display: flex; /* 👈 aparece solo al dar click */
+    nav ul.active {
+        display: flex;
+    }
+
+    nav ul li {
+        margin: 12px 0;
+        text-align: center;
     }
 
     .menu-toggle {
-        display: block; /* visible el botón en móvil */
+        display: block;
     }
 }
 
-/* 🔹 Animación de despliegue */
-@keyframes slideDown {
+/* ==========================
+   Responsive
+========================== */
+@media (max-width: 768px) {
+  /* Muestra el botón hamburguesa */
+  .menu-toggle {
+    display: block;
+    font-size: 1.8rem;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+    align-self: center;
+  }
+
+  /* Ajusta el contenedor del logo y botón */
+  .navbar {
+    flex-wrap: nowrap; /* evita que el botón baje */
+    justify-content: space-between; /* separa logo y botón */
+    align-items: center;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+
+  /* Menú oculto inicialmente */
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    background-color: #b00000;
+    position: absolute;
+    top: 80px; /* justo debajo de la navbar */
+    right: 20px;
+    width: 220px;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+    z-index: 999;
+  }
+
+  /* Menú visible cuando está activo */
+  .nav-links.active {
+    display: flex;
+    animation: slideDown 0.3s ease forwards;
+  }
+
+  @keyframes slideDown {
     from { opacity: 0; transform: translateY(-10px); }
-    to   { opacity: 1; transform: translateY(0); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Oculta el menú de usuario dentro del menú desplegable si quieres */
+  .user-menu .dropdown {
+    position: static;
+    background: none;
+    box-shadow: none;
+  }
 }
 
 /* ==========================
@@ -208,6 +293,47 @@ nav img {
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
+}
+
+.viedo-presentacion {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  position: relative;
+  border-radius: 0; /* sin bordes para pantallas grandes */
+}
+
+.viedo-presentacion video {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border: none;
+  outline: none;
+  pointer-events: none; /* evita interacción */
+  user-select: none;
+  cursor: default;
+  transition: all 0.3s ease;
+}
+
+/* ===============================
+   Responsivo (móviles y tablets)
+================================= */
+@media (max-width: 768px) {
+  .viedo-presentacion {
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+  }
+
+  .viedo-presentacion video {
+    width: 100vw;        /* ocupa todo el ancho del dispositivo */
+    height: auto;        /* ajusta alto según proporción */
+    object-fit: contain; /* evita recorte del video */
+    border-radius: 0;
+  }
 }
 
 /* ==========================
@@ -296,12 +422,13 @@ nav img {
 /* Caja del modal formulario */
 .modal-content {
   background: #fff;
-  margin: 10% auto;
-  padding: 20px;
-  border-radius: 8px;
-  width: 50%;
+  margin: 8% auto;
+  padding: 22px;
+  border-radius: 10px;
+  width: 92%;
   max-width: 600px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Botón cerrar modal */
@@ -309,32 +436,35 @@ nav img {
   float: right;
   font-size: 22px;
   cursor: pointer;
+  color: #555;
 }
 
-/* Fondo oscuro del modal imagen */
+/* ==== Modal imagen completa ==== */
 .img-modal {
   display: none;
-  position: fixed; 
-  z-index: 10000;   /* Más alto que el resto */
+  position: fixed;
+  z-index: 10000;
   top: 0;
   left: 0;
-  width: 100%; 
-  height: 100%; 
-  overflow: auto; 
+  width: 100%;
+  height: 100%;
   background-color: rgba(0,0,0,0.9);
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  overflow-y: auto;      /* ✅ permite scroll si la imagen es muy alta */
+  overflow-x: hidden;
+  padding: 40px 20px;    /* margen interno para que no pegue los bordes */
 }
 
-/* Imagen ampliada centrada */
 .img-modal img {
   display: block;
-  margin: auto;
-  max-width: 250%;   /* ocupa casi todo el ancho */
-  max-height: 200vh; /* ocupa casi toda la altura de pantalla */
+  max-width: 100%;       /* ✅ ocupa todo el ancho disponible */
+  height: auto;          /* ✅ mantiene proporción */
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.4);
-  object-fit: contain; /* asegura proporción */
+  box-shadow: 0 0 20px rgba(255,255,255,0.3);
+  margin: 0 auto;
+  object-fit: contain;   /* asegura que no se recorte */
 }
 
 /* Texto debajo de la imagen */
@@ -370,15 +500,274 @@ nav img {
   color: #ccc;
 }
 
-/* Botón de cierre modal imagen */
 .img-modal .close {
-  position: absolute;
-  top: 20px;
-  right: 40px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
+    z-index: 10001;
+}
+
+/* X visible */
+.img-modal .close::before {
+    content: "✖";
+    display: inline-block;
+    font-size: 35px;  /* grande para celular */
+    color: #fff;
+    background: rgba(0,0,0,0.3); /* opcional: fondo semitransparente */
+    border-radius: 50%;
+    padding: 5px 10px;  /* área táctil más grande */
+}
+
+/* ==== Modal imagen completa ==== */
+.img-modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.95);
+  justify-content: flex-start;  /* 👈 Para mostrar desde arriba si es muy alta */
+  align-items: center;
+  flex-direction: column;
+  overflow-y: auto;  /* ✅ scroll vertical habilitado */
+  overflow-x: hidden;
+  padding: 30px 10px;  /* margen interno para respiración */
+}
+
+.img-modal img {
+  width: auto;
+  max-width: 95%;      /* ocupa casi todo el ancho */
+  height: auto;
+  max-height: none;    /* 👈 permite que crezca libremente */
+  object-fit: contain; /* mantiene proporción sin recortar */
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(255,255,255,0.3);
+  margin: 20px auto;   /* centrado con espacio arriba y abajo */
+  display: block;
+}
+
+/* Texto debajo de la imagen */
+.modal-texto {
+  max-width: 800px;
+  text-align: center;
+  color: #f0f0f0;
+  margin: 10px auto 40px auto;
+  padding: 0 15px;
+}
+
+.modal-texto h2 {
   color: #fff;
-  font-size: 40px;
-  font-weight: bold;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.modal-texto p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+/* Botón cerrar (X) */
+.img-modal .close {
+  position: fixed;
+  top: 15px;
+  right: 20px;
   cursor: pointer;
+  z-index: 10001;
+  background: rgba(0,0,0,0.4);
+  padding: 8px 14px;
+  border-radius: 50%;
+}
+
+.img-modal .close::before {
+  content: "✖";
+  font-size: 30px;
+  color: #fff;
+}
+
+/* ======== FORMULARIO MODERNO ======== */
+.form-noticia {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 6px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+  display: block;
+  font-size: 0.95rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="file"],
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+  background: #fbfbfb;
+  color: #222;
+}
+
+.form-group input[type="file"] {
+  padding: 8px 10px;
+  background: transparent;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #d60000;
+  box-shadow: 0 4px 18px rgba(214,0,0,0.06);
+  outline: none;
+}
+
+.form-group textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.5;
+}
+
+/* Botones del formulario */
+.form-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.btn-guardar {
+  background: #d60000;
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.08s ease;
+  box-shadow: 0 6px 14px rgba(214,0,0,0.12);
+}
+
+.btn-guardar:hover {
+  background: #a10000;
+  transform: translateY(-1px);
+}
+
+.btn-cancelar {
+  background: #f2f2f2;
+  color: #222;
+  padding: 10px 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.18s ease;
+  border: 1px solid #e0e0e0;
+}
+
+.btn-cancelar:hover {
+  background: #e6e6e6;
+}
+
+/* ==== Modal imagen completa FINAL ==== */
+.img-modal {
+  display: none;
+  position: fixed;
+  z-index: 10000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.95);
+  justify-content: flex-start;    /* Muestra desde arriba si es alta */
+  align-items: center;
+  flex-direction: column;
+  overflow-y: auto;               /* ✅ Scroll vertical si es larga */
+  overflow-x: hidden;
+  padding: 30px 10px;
+  animation: fadeIn 0.3s ease;    /* Animación suave al abrir */
+}
+
+.img-modal img {
+  width: auto;
+  max-width: 95%;                 /* Usa casi todo el ancho disponible */
+  height: auto;
+  max-height: none;               /* ✅ sin límite vertical */
+  object-fit: contain;            /* Mantiene proporción */
+  border-radius: 10px;
+  box-shadow: 0 0 25px rgba(255,255,255,0.3);
+  margin: 20px auto;              /* Centrada con espacio */
+  display: block;
+  animation: zoomIn 0.3s ease;
+}
+
+/* Texto debajo de la imagen */
+.modal-texto {
+  max-width: 800px;
+  text-align: center;
+  color: #f0f0f0;
+  margin: 15px auto 40px auto;
+  padding: 0 15px;
+}
+
+.modal-texto h2 {
+  color: #fff;
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.modal-texto p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ddd;
+}
+
+/* Botón cerrar (X) */
+.img-modal .close {
+  position: fixed;
+  top: 20px;
+  right: 25px;
+  cursor: pointer;
+  z-index: 10001;
+  background: rgba(0,0,0,0.4);
+  padding: 8px 14px;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.img-modal .close:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+.img-modal .close::before {
+  content: "✖";
+  font-size: 30px;
+  color: #fff;
+}
+
+/* ==========================
+   Animaciones suaves
+========================== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.96); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 /* ==========================
@@ -442,12 +831,19 @@ nav img {
 ========================== */
 .cronograma-card {
     background: #ffffff;        /* Fondo blanco */
-    color: black;             /* Texto gris oscuro */
+    color: black;               /* Texto gris oscuro */
     padding: 20px;
     border: 4px solid #c62828;  /* Borde rojo elegante */
     border-radius: 6px;
     margin-bottom: 20px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.08); /* Sombra suave */
+
+    max-height: 500px;          /* Altura máxima antes de activar scroll */
+    overflow-y: auto;           /* Scroll vertical */
+    -webkit-overflow-scrolling: touch; /* scroll fluido en iOS */
+    scrollbar-width: thin;
+    scrollbar-color: #c62828 #f1f1f1;
+    width: 100%;                /* Ocupa todo el ancho disponible */
 }
 
 /* Título */
@@ -470,12 +866,12 @@ nav img {
 
 /* Línea divisoria debajo de la fecha */
 .cronograma-card .fecha {
-    border-bottom: 4px solid #52007b; /* Rojo oscuro */
+    border-bottom: 4px solid #52007b; 
     padding-bottom: 6px;
     margin-bottom: 12px;
     display: block;
     font-weight: bold;
-    color: #d32f2f;             /* Resaltado en rojo */
+    color: #d32f2f;
 }
 
 /* Lista */
@@ -492,7 +888,48 @@ nav img {
 
 /* Exhibiciones destacadas */
 .cronograma-list li b {
-    color: #c62828; /* Rojo para resaltar los EXHIB */
+    color: #c62828;
+}
+
+/* Scrollbar para Chrome, Edge y Safari */
+.cronograma-card::-webkit-scrollbar {
+    width: 8px;
+}
+
+.cronograma-card::-webkit-scrollbar-thumb {
+    background-color: #c62828;
+    border-radius: 4px;
+}
+
+.cronograma-card::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* ==========================
+   Media Queries móviles
+========================== */
+@media (max-width: 768px) {
+    .cronograma-card {
+        padding: 15px;
+        max-height: 350px !important;   /* límite más bajo */
+        height: 350px !important;       /* 👈 fuerza altura */
+        overflow-y: scroll !important;  /* 👈 asegura scroll vertical */
+        flex-shrink: 0;                 /* evita que flexbox lo estire */
+        display: block;                 /* asegura que no se expanda */
+    }
+
+    .cronograma-card h3 { font-size: 16px; }
+    .cronograma-card h2 { font-size: 14px; }
+    .cronograma-card h4 { font-size: 13px; }
+
+    .cronograma-list {
+        padding-left: 14px;
+        margin: 0;
+    }
+
+    .cronograma-list li {
+        font-size: 12px;
+    }
 }
 
 /* ==========================
@@ -587,4 +1024,311 @@ nav img {
     .footer-column {
         flex: 1 1 100%;
     }
+}
+
+/* ==========================
+ 🌟 DISEÑO COMPLETO PARA MÓVIL
+========================== */
+@media (max-width: 768px) {
+
+  /* ======= NAVBAR ======= */
+  nav {
+    padding: 10px 20px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    background: linear-gradient(90deg, #d60000, #a80000);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  nav img {
+    height: 40px;
+    margin: 0;
+    border-radius: 6px;
+  }
+
+  nav .logo {
+    font-size: 1.2rem;
+    margin-left: 8px;
+  }
+
+  .menu-toggle {
+    display: block;
+    font-size: 1.8rem;
+    color: #fff;
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+  }
+
+  nav ul {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    background: #a80000;
+    position: absolute;
+    top: 65px;
+    right: 15px;
+    width: 80%;
+    border-radius: 10px;
+    padding: 10px 0;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    text-align: center;
+  }
+
+  nav ul.active {
+    display: flex;
+    animation: fadeIn 0.3s ease;
+  }
+
+  nav ul li {
+    padding: 10px 0;
+    width: 100%;
+  }
+
+  nav ul li a {
+    font-size: 1rem;
+    color: #fff;
+    width: 100%;
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(-10px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  /* ======= CONTENEDOR PRINCIPAL ======= */
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 15px;
+  }
+
+  .left-column,
+  .center-column,
+  .right-column {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    background: #fff;
+  }
+
+  /* ======= SECCIÓN DE NOTICIAS ======= */
+  .noticia-item {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #f9f9f9;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin-bottom: 10px;
+  }
+
+  .noticia-item img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+
+  .texto-noticia {
+    padding: 10px;
+  }
+
+  .texto-noticia h4 {
+    font-size: 1rem;
+    color: #b00000;
+    margin-bottom: 5px;
+  }
+
+  .texto-noticia p {
+    font-size: 0.85rem;
+    color: #333;
+  }
+
+  /* ======= TRANSMISIÓN ======= */
+  .live-screen {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .transmission-info {
+    padding: 10px 12px;
+  }
+
+  .transmission-info h2 {
+    font-size: 1.1rem;
+    color: #b00000;
+  }
+
+  .transmission-info p {
+    font-size: 0.9rem;
+    color: #333;
+  }
+
+  /* ======= CRONOGRAMA ======= */
+  .cronograma-card {
+    background: #f8f8f8;
+    border-radius: 10px;
+    padding: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    overflow: visible;
+    max-height: none;
+  }
+
+  .cronograma-card h3 {
+    font-size: 1rem;
+    color: #b00000;
+    margin-bottom: 8px;
+  }
+
+  .cronograma-list li {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+
+  /* ======= PUBLICIDAD ======= */
+  .publicidad {
+    background: #fff;
+    padding: 12px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+  .publicidad img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 10px;
+    margin: 10px 0;
+  }
+
+  #contador {
+    font-weight: bold;
+    color: #b00000;
+    font-size: 1rem;
+    margin-top: 5px;
+  }
+
+  /* ======= PIE DE PÁGINA ======= */
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    background: #b00000;
+    color: #fff;
+  }
+
+  .footer-column {
+    margin-bottom: 10px;
+  }
+
+  .footer a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+  .footer a:hover {
+    text-decoration: underline;
+  }
+
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 8px;
+  }
+
+  .social-icons a {
+    font-size: 1.2rem;
+    color: #fff;
+  }
+
+  .social-icons a:hover {
+    color: #ffcc00;
+  }
+}
+
+/* ==========================
+ 📱 EXTRAPEQUEÑOS (480px)
+========================== */
+@media (max-width: 480px) {
+  nav .logo {
+    font-size: 1rem;
+  }
+
+  .menu-toggle {
+    font-size: 1.6rem;
+  }
+
+  .texto-noticia h4 {
+    font-size: 0.95rem;
+  }
+
+  .texto-noticia p {
+    font-size: 0.8rem;
+  }
+
+  #contador {
+    font-size: 0.95rem;
+  }
+
+  .footer {
+    font-size: 0.85rem;
+  }
+}
+
+
+/* ======= NAV OCULTO AL INICIO ======= */
+nav ul {
+  display: none; /* oculto por defecto */
+}
+
+nav ul.active {
+  display: flex; /* se muestra al hacer clic */
+  flex-direction: column;
+  align-items: center;
+  background: #a80000;
+  position: absolute;
+  top: 65px;
+  right: 15px;
+  width: 80%;
+  border-radius: 10px;
+  padding: 10px 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.menu-toggle {
+  display: block; /* botón hamburguesa visible */
+  font-size: 1.8rem;
+  color: #fff;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+/* Para escritorio (mostrar menú normal) */
+@media (min-width: 769px) {
+  nav ul {
+    display: flex !important;
+    position: static;
+    flex-direction: row;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  .menu-toggle {
+    display: none;
+  }
 }

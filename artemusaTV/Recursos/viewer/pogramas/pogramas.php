@@ -1,6 +1,6 @@
 <?php
 // Conexión a la base de datos
-$conexion = new mysqli("localhost", "root", "", "artemusatvphp");
+$conexion = new mysqli("localhost", "artemusa_artemusa", "7j4vV2mp5V", "artemusa_artemusatvphp");
 
 // Validar conexión
 if ($conexion->connect_errno) {
@@ -19,18 +19,21 @@ $sql = "SELECT id, nombre, descripcion, canal,
 
 $resultado = $conexion->query($sql);
 ?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📺 Programación de Hoy</title>
+    <link rel="stylesheet" href="css/styleP.css">
     <link rel="stylesheet" href="css/styleP.css">
     <link rel="icon" href="../img/ixon.jpg">
 </head>
 <body>
     <nav>
-        <<div class="nav-left">
-            <img src="../img/nuevo logo011.png" alt="iconA" class="nav-banner">
+        <div class="nav-left">
+            <img src="../img/nuevo_logo011.png" alt="iconA" class="nav-banner">
             <a href="../index.php" class="logo">ARTEMUSA TV</a>
         </div>
 
@@ -50,9 +53,9 @@ $resultado = $conexion->query($sql);
                     <?= $_SESSION['usuario'] ?? 'Invitado' ?> ⬇
                 </a>
                 <ul class="dropdown">
-                    <li>Correo: <?= $_SESSION['correo'] ?? '' ?></li>
-                    <li>Rol: <?= $_SESSION['rol'] ?? '' ?></li>
-                    <li><a href="../../../public/logout.php">Cerrar sesión</a></li>
+                    <li>Correo: <?= htmlspecialchars($_SESSION['correo'] ?? '') ?></li>
+                    <li>Rol: <?= htmlspecialchars($_SESSION['rol'] ?? '') ?></li>
+                    <li><a href="/public/logout.php">Cerrar sesión</a></li>
                 </ul>
             </li>
         </ul>
@@ -62,28 +65,32 @@ $resultado = $conexion->query($sql);
 
     <!-- Tabla de Programación -->
     <table>
-        <tr>
+        <thead>
+            <tr>
             <th>ID</th>
             <th>Programa</th>
             <th>Descripción</th>
             <th>Horario</th>
             <th>Canal</th>
-        </tr>
-        <?php if ($resultado && $resultado->num_rows > 0): ?>
-            <?php while($fila = $resultado->fetch_assoc()): ?>
-                <tr>
-                    <td><?= $fila['id'] ?></td>
-                    <td><?= htmlspecialchars($fila['nombre']) ?></td>
-                    <td><?= htmlspecialchars($fila['descripcion']) ?></td>
-                    <td><?= htmlspecialchars($fila['horario']) ?></td>
-                    <td><?= htmlspecialchars($fila['canal']) ?></td>
-                </tr>
-            <?php endwhile; ?>
-        <?php else: ?>
-            <tr>
-                <td class="no-data" colspan="5">📌 No hay programación disponible</td>
             </tr>
-        <?php endif; ?>
+        </thead>
+        <tbody>
+            <?php if ($resultado && $resultado->num_rows > 0): ?>
+                <?php while($fila = $resultado->fetch_assoc()): ?>
+                    <tr>
+                        <td data-label="ID"><?= $fila['id'] ?></td>
+                        <td data-label="Programa"><?= htmlspecialchars($fila['nombre']) ?></td>
+                        <td data-label="Descripción"><?= htmlspecialchars($fila['descripcion']) ?></td>
+                        <td data-label="Horario"><?= htmlspecialchars($fila['horario']) ?></td>
+                        <td data-label="Canal"><?= htmlspecialchars($fila['canal']) ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            <?php else: ?>
+                <tr>
+                    <td class="no-data" colspan="5">📌 No hay programación disponible</td>
+                </tr>
+            <?php endif; ?>
+        </tbody>
     </table>
     
     <!-- Pie de página -->
@@ -106,5 +113,14 @@ $resultado = $conexion->query($sql);
             </ul>
         </div>
     </div>
+
+    <script>
+        const menuToggle = document.getElementById("menu-toggle");
+        const navLinks = document.getElementById("nav-links");
+
+        menuToggle.addEventListener("click", () => {
+            navLinks.classList.toggle("active");
+        });
+    </script>
 </body>
 </html>

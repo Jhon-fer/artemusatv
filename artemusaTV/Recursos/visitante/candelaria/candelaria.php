@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/candelaria.css">
     <link rel="stylesheet" href="../estiloCelular.css">
+    <link rel="stylesheet" href="css/candelaria.css">
     <link rel="icon" href="../img/ixon.jpg">
     <title>SOY CANDELARIA</title>
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-left">
-            <img src="../img/nuevo logo011.png" alt="iconA" class="nav-banner">
-            <a href="index.php" class="logo">ARTEMUSA TV</a>
+            <img src="../img/nuevo_logo011.png" alt="iconA" class="nav-banner">
+            <a href="../index.php" class="logo">ARTEMUSA TV</a>
         </div>
 
         <!-- Botón hamburguesa -->
@@ -25,11 +25,19 @@
             <li><a href="../pogramas/pogramas.php">Programas</a></li>
             <li><a href="../informacion/informacion.php">Informacion</a></li>
             <li><a href="../contacto/contacto.php">Contacto</a></li>
-            <li><a href="/Practicas/artemusaTV/app/views/login.php">Iniciar sesión</a></li>
+            <li><a href="app/views/login.php">Iniciar sesión</a></li>
         </ul>
     </nav>
 
+    <div class="viedo-presentacion">
+        <video autoplay muted loop playsinline>
+            <source src="../../publicidad/vido pagina.mp4" type="video/mp4">
+            Tu navegador no soporta el formato de video.
+        </video>
+    </div>
+
     <div class="main-container">
+
         <!-- Columna izquierda: Carrusel de noticias -->
         <div class="left-column">
             <h2>Noticias</h2>
@@ -98,133 +106,297 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> <!-- /Columna izquierda -->
 
         <!-- Columna central: Pantalla de transmisión -->
         <div class="center-column">
-            <h1>🔴 EN VIVO</h1>
-            <!-- Pantalla de transmisión //////////////////////////////////////////////////////////// -->
-            <div class="live-screen" style="position: relative; width: 100%; max-width: 1200px; padding-bottom: 56.25%; /* 16:9 */ height: 0; margin: 0 auto;">
-                <iframe 
-                    src="https://ssh101.com/securelive/index.php?id=artemusatv02&adult=yes"
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
-                    allow="autoplay; fullscreen"
-                    allowfullscreen>
+            <h1>🔴 REPETICIÓN</h1>
+            <div class="live-screen" style="position: relative; width: 100%; max-width: 1200px; padding-bottom: 56.25%; height: 0; margin: 0 auto;">
+                <iframe
+                    src="https://www.youtube.com/embed/kX_SKSceGik"
+                    width="560"
+                    height="315"
+                    style="position:absolute; top:0; left:0; width:100%; height:100%; border:none; overflow:hidden;"
+                    scrolling="no"
+                    frameborder="0"
+                    allowfullscreen
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
                 </iframe>
             </div>
-            
+
             <!-- Información dinámica de la transmisión debajo del video -->
             <div class="transmission-info">
-                <h2 id="live-title">XLVIII CONCURSO REGIONAL DE SIKURIS</h2>
+                <h2 id="live-title">CONCURSO PARA LA VIRGEN DE LA CANDELARIA</h2>
                 <p id="live-description">
-                    Clasificatorio a la Festividad Virgen de la Candelaria 2026
-                    La Federación Regional de Folklore y Cultura de Puno da a conocer la lista oficial de presentación de conjuntos participantes en el 
-                    XLVIII Concurso Regional de Sikuris, clasificatorio a la Festividad Virgen de la Candelaria 2026.
+                    La Federación Regional de Folklore y Cultura de Puno da a conocer la lista oficial de presentación de conjuntos participantes en el
+                    Festividad Virgen de la Candelaria 2026.
                 </p>
             </div>
 
-            <!-- CRONOGRAMA -->
+            <!-- ============================================
+                VENERACIÓN Y PARADA EN HONOR A LA SANTÍSIMA
+                VIRGEN DE LA CANDELARIA - 2026
+            =============================================== -->
             <div class="tiktok-section">
-                <h2>CRONOGRAMA DE PARTICIPACIÓN OFICIAL</h2>
+                <h2 class="titulo-cronograma">
+                    VENERACIÓN Y PARADA DE DANZAS AUTÓCTONAS EN HONOR A LA SANTÍSIMA<br>
+                    VIRGEN DE LA CANDELARIA – 2026
+                </h2>
+
                 <div class="shorts-grid">
+
+                    <!-- Día 1 -->
                     <div class="cronograma-card">
-                        <h3>XLVIII Concurso Regional de Sikuris</h3>
-                        <h2>Clasificatorio a la Festividad Virgen de la Candelaria 2026</h2>
-                        <a href="https://maps.app.goo.gl/fAk17xmqVwxdS7VR6" target="_blank"><h4>Coliseo Cerrado – El Collao, Ilave</h4></a>
-                        <p class="fecha">📅 Domingo 28 de setiembre de 2025</p>
-                        
-                        <ul class="cronograma-list">
-                            <li><b>EXHIB:</b> Conjunto Juvenil de Zampoñistas Raimondinos</li>
-                            <li><b>EXHIB:</b> Zampoñada de la I.E.S. Politécnico Regional "Don Bosco" – Ilave</li>
-                            <li>1. Conjunto Juvenil 24 de Junio del Barrio San José – Ilave – El Collao</li>
-                            <li>2. Expresión de Arte y Cultura Q'óri Waynas de Caracoto</li>
-                            <li>3. Asociación Cultural de Arte y Vientos Aymara Sikuris Wila Taki – Ilave</li>
-                            <li>4. Agrupación Cultural Sicuris "Claveles Rojos" de Huancané</li>
-                            <li>5. Agrupación Musical de Vientos Sikuris Sentimiento Acoreño</li>
-                            <li>6. Internacional Grupo de Arte Sikuris Los Chasquis de Coasia – Vilquechico</li>
-                            <li>7. Conjunto de Sikuris Glorioso San Carlos – Puno</li>
-                            <li>8. Asociación Cultural de Sikuris Lully Marka – Juli</li>
-                            <li>9. Asociación Cultural de Sikuris Emblemáticos Huayruros – Puno</li>
-                            <li>10. Asociación Cultural Sicuris Suma Chuyma de Molloco – Acora</li>
-                            <li>11. Suri Sikuris Ciudad del Lago – Puno</li>
-                            <li>12. Conjunto de Zampoñistas Juventud Paxa "Jupax"</li>
-                            <li>13. Expresión Cultural Milenarios de Sikuris Internacional Los Rosales – Rosaspata, Huancané</li>
-                            <li>14. Sikuris 27 de Junio Nueva Era – Puno</li>
-                            <li>15. Taller de Arte Popular "Yawar Inca" – Juliaca</li>
-                            <li>16. Sociedad de Expresión Cultural Sikuris Wara Wara Wayras – Huatasani</li>
-                            <li>17. Agrupación Sentimiento Cultural Sikuris 19 de Setiembre – Huancané</li>
-                            <li>18. Agrupación Zampoñistas Proyecto Puno</li>
-                            <li>19. Conjunto Milenario de Sikuris 12 de Diciembre – El Collao</li>
-                            <li>20. Agrupación de Expresión Cultural de Sikuri y Danza Los Bosques – Huancané</li>
-                            <li>21. Asociación Cultural de Arte Zampoñistas Confraternidad – Acora</li>
-                            <li>22. Organización Cultural Armonía de Vientos Huj'maya – Puno</li>
-                            <li>23. Centro de Expresión Cultural Sikuris 12 de Julio Inchupalla – Huancané</li>
-                            <li>24. Asociación de Ayarachis Somos Patrimonio de la Cosmovisión Andina – Paratia, Lampa</li>
-                            <li>25. Comunidad de Arte y Cultura Lupaka – Puno</li>
-                            <li>26. Organización Cultural Wiñay Quta Marka de Ccota – Platería</li>
-                            <li>27. Conjunto de Arte y Folklore Sicuris Juventud Obrera</li>
-                            <li>28. Asociación Cultural Sangre Indomable – Azángaro</li>
-                            <li>29. Sociedad Centro Social de Folklore y Cultura: Sikuris y Danzas Autóctonas "Fundación Pokopaka" – Huancané</li>
-                            <li>30. Asociación Cultural 11 de Noviembre "Rijchariy Wayra"</li>
-                            <li>31. Asociación de Expresión Cultural Juvenil 29 de Setiembre – Ilave</li>
-                            <li>32. Conjunto de Músicos y Danzas Autóctonos "Wiñay Qhantati" – Ururi Conima</li>
-                            <li>33. Asociación Juvenil Cabanillas Sikuris AJC</li>
-                            <li>34. Asociación La Voz Cultural Khantus 13 de Mayo – Huayrapata</li>
-                            <li>35. Agrupación Cultural de Sikuris Juventud Janansaya – Quilcapuncu, San Antonio de Putina</li>
-                            <li>36. Agrupación de Zampoñistas del Altiplano del Barrio Huajsapata – Puno</li>
-                            <li>37. Asociación Cultural de Sicuris Proyecto Pariwanas – Huancané</li>
-                            <li>38. Asociación Cultural de Sikuris "Fuerza Joven" – Puno</li>
-                            <li>39. Zampoñistas Nuevo Impacto – Acora</li>
-                            <li>40. Agrupación Juvenil Nuevo Amanecer Sikuris "Inti Marka" – Coata</li>
-                            <li>41. Conjunto Sikuris 15 de Mayo de Cambria – Conima</li>
-                            <li>42. Conjunto de Zampoñistas "Expresión Cultural" del Centro de Ocoña – Ilave</li>
-                            <li>43. Agrupación de Sikuris Raíces Aymaras – Ilave "ASIKUR"</li>
-                            <li>44. Asociación Cultural de Sikuris Intercontinentales Aymaras – Huancané</li>
-                            <li>45. Asociación Cultural Genuinos Ayarachis – Paratia, Lampa</li>
-                            <li>46. Asociación Sociedad Sikuris Proyecto Peña Blanca – Santa Lucía, Lampa</li>
-                            <li>47. Asociación Juvenil de Sikuris y Zampoñas Wayra Marka – Juliaca</li>
-                            <li>48. Centro Cultural Melodías El Collao – Ilave</li>
-                            <li>49. Agrupación Cultural Sikuris Sentimiento Rosal Andino – Cabana</li>
-                            <li>50. Conjunto de Sikuris Centro Cultural 2 de Febrero de Sucuni – Conima</li>
-                            <li>51. Taller de Arte, Música y Danza "Real Asunción" – Juli</li>
-                            <li>52. Grupo de Arte 14 de Setiembre – Moho</li>
-                            <li>53. Asociación Cultural Asiruni Estrella – Calapuja, Lampa</li>
-                            <li>54. Asociación Folklórica Ayarachis Riqchary Huayna – Cuyo Cuyo, Sandia</li>
-                            <li>55. Agrupación Sociedad Cultural Autóctono Sikuris Wila Marka – Conima</li>
-                            <li>56. Conjunto de Zampoñistas "Cajas Reales" – Chucuito, Herederos Milenarios</li>
-                            <li>57. Centro Cultural Sentimiento Sikuris Los Vicuñas de la Inmaculada – Lampa</li>
-                            <li>58. Agrupación Cultural de Música y Danzas Autóctonas Sikuris 29 de Setiembre – Chillcapata, Conima</li>
-                            <li>59. Asociación Cultural Sikuris Kalacampana – Chucuito</li>
-                            <li>60. Asociación Cultural Música Danza Sikuris Viento Andino Nueva Era</li>
-                            <li>61. Asociación Juvenil Sikuris Kantutas Rojas – Isaňura, Capachica, Puno</li>
-                            <li>62. Asociación de Zampoñistas Juventud Mañazo</li>
-                            <li>63. Expresión Cultural Sikuris Inmortales Hatun Jachas – Putina</li>
-                            <li>64. Auténticos Ayarachis de Antalla – Palca, Lampa</li>
-                            <li>65. Conjunto de Zampoñas Juventud Central – Chucuito, Puno</li>
-                            <li>66. Conjunto de Sikuris Legendario Qheny Sankayo – Huatta, Conima</li>
-                            <li>67. Conjunto de Sicuris Proyecto Cultural Wiñay Panqara Marka – Moho</li>
-                            <li>68. Asociación Cultural Zampoñistas Arco Blanco – Puno</li>
-                            <li>69. Asociación Juvenil Carabaya Sikuris 8 de Diciembre – Macusani</li>
-                            <li>70. Conjunto de Danzas y Música Autóctona Qhantati Ururi – Conima</li>
-                            <li>71. Centenario Conjunto Sicuris del Barrio Mañazo</li>
-                            <li>72. Asociación Cultural de Sikuris Los Aymaras – Huancané</li>
-                            <li>73. Centro de Expresión Cultural Andino Sikuris Jurimarka Occopampa – Moho</li>
-                            <li>74. Centro de Expresión Cultural de Arte Milenario Originarias Ayarachis Chullunquiani – Palca, Lampa</li>
-                            <li>75. Agrupación Sentimiento Sikuris de Ingeniería Civil</li>
-                            <li>76. Sikuris Raíces Andinos Los Quechuas (ASIRAQ) – Santa Lucía</li>
-                            <li>77. Asociación de Zampoñistas y Danzas Autóctonas San Francisco de Borja – Yunguyo</li>
-                            <li>78. Centro de Expresión Cultural Wayra Marka – San Román</li>
-                            <li>79. Asociación Juvenil Puno Sikuris 27 de Junio (AJP)</li>
-                            <li>80. Asociación Cultural Zampoñistas Lacustre del Barrio José Antonio Encinas – Puno</li>
-                            <li>81. Cultural de Arte Milenario Heraldos Sangre Aymara – Ilave</li>
-                            <li>82. Auténticos Ayarachis Tawantin Ayllu – Cuyo Cuyo, Sandia</li>
-                            <li>83. Centro de Expresión Cultural Sikuris "Sentimiento Q'ori Wayra" – San Antonio de Putina</li>
-                            <li>84. Agrupación Cultural Milenaria de Sikuris Internacional Huarihumas – Rosaspata, Huancané</li>
-                        </ul>
+                    <h3>Primer Día: Lunes 09 de Febrero del 2026</h3>
+                    <p class="fecha">🕗 Hora de Inicio: 08:00 a.m.</p>
+
+                    <ul class="cronograma-list">
+                        <li><strong>Exhibición:</strong> ORGANIZACIÓN CULTURAL ARMONÍA DE VIENTOS HUJ'MAYA</li>
+                        <li><strong>Exhibición:</strong> CONJUNTO DE SIKURIS GLORIOSO SAN CARLOS</li>
+
+                        <li>1. CONJUNTO DE ZAMPOÑAS Y DANZAS UNI</li>
+                        <li>2. CONJUNTO CLASIFICADO SALIDA DE MANCO CAPAC Y MAMA OCLLO 2025</li>
+                        <li>3. AGRUPACIÓN DE SIKURIS RAÍCES AYMARAS – ILAVE "ASIKUR"</li>
+                        <li>4. FRATERNIDAD CAPORALES VIRGEN DE LA CANDELARIA "VIENTOS DEL SUR"</li>
+                        <li>5. ASOCIACIÓN CULTURAL ZAMPOÑISTAS LACUSTRE DEL BARRIO JOSÉ ANTONIO ENCINAS</li>
+                        <li>6. MORENADA VIRGEN DE LA CANDELARIA - MANDACHITOS</li>
+                        <li>7. ASOCIACIÓN FOLKLÓRICA DIABLADA "CENTINELAS DEL ALTIPLANO"</li>
+                        <li>8. ASOCIACIÓN CULTURAL DE SIKURIS LOS AYMARAS DE HUANCANÉ</li>
+                        <li>9. ASOCIACIÓN FOLKLÓRICA CAPORALES SAN VALENTÍN</li>
+                        <li>10. WACA WACA DEL BARRIO PORTEÑO</li>
+                        <li>11. JUVENTUD TINKUS DEL BARRIO PORTEÑO</li>
+                        <li>12. ASOCIACIÓN CULTURAL "MORENADA AZOGUINI"</li>
+                        <li>13. CONJUNTO DE DANZAS Y MÚSICA AUTÓCTONA QHANTATI URURI DE CONIMA</li>
+                        <li>14. CONJUNTO FOLKLÓRICO LOS CAPORALES DE LA TUNTUNA DEL BARRIO MIRAFLORES</li>
+                        <li>15. CONJUNTO DE ZAMPOÑAS "EXPRESIÓN CULTURAL" DEL CENTRO DE OCOÑA – TRADICIONAL REY MORENO SAN ANTONIO</li>
+                        <li>17. AGRUPACIÓN KULLAHUADA VICTORIA</li>
+                        <li>18. EXPRESIÓN CULTURAL MILENARIOS DE SIKURIS INTERNACIONAL LOS ROSALES – ROSASPATA, HUANCANÉ</li>
+                        <li>19. ESCUELA DE ARTE "JOSÉ CARLOS MARIÁTEGUI" ZAMBOS TUNDIQUES</li>
+                        <li>20. FABULOSA MORENADA INDEPENDENCIA</li>
+                        <li>21. DIABLADA CONFRATERNIDAD VICTORIA</li>
+                        <li>22. AGRUPACIÓN SANGRE CHUMBIVILCANA – DANZA HUAYLIA CHUMBIVILCANA – CUSCO</li>
+                        <li>23. GRUPO DE ARTE 14 DE SEPTIEMBRE – MOHO</li>
+                        <li>24. ASOCIACIÓN CULTURAL FOLKLÓRICA "LEGADO CAPORAL"</li>
+                        <li><strong>Invitado:</strong> WIFALAS SAN FRANCISCO JAVIER DE MUÑANI (Campeón Danzas Originarios 2025)</li>
+                        <li>25. AGRUPACIÓN DE ZAMPOÑISTAS DEL ALTIPLANO DEL BARRIO HUAJSAPATA – PUNO</li>
+                        <li>26. AUTÉNTICOS AYARACHIS TAWANTIN AYLLU – CUYO CUYO, SANDIA</li>
+                        <li>27. MORENADA LAYKAKOTA</li>
+                        <li>28. CENTRO SOCIAL KULLAHUADA CENTRAL – PUNO</li>
+                        <li>29. AGRUPACIÓN CULTURAL SICURIS "CLAVELES ROJOS" DE HUANCANÉ</li>
+                        <li>30. CONJUNTO CLASIFICADO SALIDA DE MANCO CAPAC Y MAMA OCLLO 2025</li>
+                        <li>31. FRATERNIDAD ARTÍSTICA SAMBOS CAPORALES SEÑOR DE QOILLOR-RITTY</li>
+                        <li>32. ASOCIACIÓN CULTURAL FOLKLÓRICA TOBAS AMAZONAS ANATA</li>
+                        <li>33. CONJUNTO MORENADA "RICARDO PALMA"</li>
+                        <li>34. CONJUNTO SIKURIS 15 DE MAYO DE CAMBRIA – CONIMA</li>
+                        <li>35. ASOCIACIÓN DE ARTE, CULTURA Y FOLKLORE CAPORALES DE SIEMPRE – PITONES</li>
+                        <li>36. ASOCIACIÓN FOLKLÓRICA ESPECTACULAR DIABLADA BELLAVISTA</li>
+                        <li>37. MORENADA CENTRAL GALENO – DR. RICARDO J. RUELAS RODRÍGUEZ</li>
+                        <li>38. ASOCIACIÓN FOLKLÓRICA WACA WACA SANTA ROSA</li>
+                        <li>39. CONJUNTO FOLKLÓRICO LA LLAMERADA DEL CLUB JUVENIL ANDINO DE LAMPA</li>
+                        <li>40. ESCUELA INTERNACIONAL DEL FOLKLORE CAPORALES DEL SUR – PUNO</li>
+                        <li>41. CENTENARIO CONJUNTO SICURIS DEL BARRIO MAÑAZO</li>
+                        <li>42. ASOCIACIÓN MORENADA PORTEÑO</li>
+                        <li>43. SOCIEDAD DE EXPRESIÓN CULTURAL SIKURIS WARA WARA WAYRAS – HUATASANI, HUANCANÉ</li>
+                        <li>44. CENTRO UNIVERSITARIO DE FOLKLORE Y CONJUNTO DE ZAMPOÑAS DE LA UNIVERSIDAD NACIONAL MAYOR DE SAN MARCOS (CZSM)</li>
+                        <li>45. AGRUPACIÓN CULTURAL MILENARIA DE SIKURIS INTERNACIONAL HUARIHUMA – ROSASPATA, HUANCANÉ</li>
+                        <li>46. ASOCIACIÓN FOLKLÓRICA VIRGEN DE LA CANDELARIA – AFOVIC</li>
+                        <li>47. CONJUNTO FOLKLÓRICO MORENADA ORKAPATA</li>
+                        <li>48. ASOCIACIÓN FOLKLÓRICA DIABLADA AZOGUINI</li>
+                        <li><strong>Exhibición:</strong> ASOCIACIÓN CULTURAL CAPORALES MI VIEJO SJ</li>
+                    </ul>
+                    </div>
+
+                    <!-- Día 2 -->
+                    <div class="cronograma-card">
+                    <h3>Segundo Día: Martes 10 de Febrero del 2026</h3>
+                    <p class="fecha">🕗 Hora de Inicio: 08:00 a.m.</p>
+
+                    <ul class="cronograma-list">
+                        <li>49. ASOCIACIÓN CULTURAL SANGRE INDOMABLE – AZÁNGARO</li>
+                        <li>50. CONJUNTO DE ZAMPOÑISTAS JUVENTUD PAXA "JUPAX"</li>
+                        <li>51. REY MORENO LAYKAKOTA</li>
+                        <li>52. ASOCIACIÓN CULTURAL ECOLÓGICA ETNIAS AMAZÓNICAS DEL PERÚ – BIODANZA</li>
+                        <li>53. ASOCIACIÓN CULTURAL DE SIKURIS INTERCONTINENTALES AYMARAS DE HUANCANÉ</li>
+                        <li>54. ASOCIACIÓN FOLKLÓRICA CAPORALES "SAMBOS CON SENTIMIENTO Y DEVOCIÓN"</li>
+                        <li>55. CONFRATERNIDAD DIABLADA SAN ANTONIO</li>
+                        <li>56. COFRADÍA DE NEGRITOS CHACÓN BEATERIO DE HUÁNUCO</li>
+                        <li>57. CONFRATERNIDAD CULTURAL WACAS – PUNO</li>
+                        <li>58. CONJUNTO CLASIFICADO SALIDA DE MANCO CAPAC Y MAMA OCLLO 2025</li>
+                        <li>59. AGRUPACIÓN SOCIEDAD CULTURAL AUTÓCTONO SIKURIS WILA MARCA – CONIMA</li>
+                        <li>60. ASOCIACIÓN CULTURAL FOLKLÓRICA CAPORALES HUÁSCAR</li>
+                        <li>61. TALLER DE ARTE, MÚSICA Y DANZA "REAL ASUNCIÓN" – JULI</li>
+                        <li>62. PODEROSA Y ESPECTACULAR MORENADAS BELLAVISTA</li>
+                        <li>63. ASOCIACIÓN DE ARTE Y FOLKLORE CAPORALES SAN JUAN BAUTISTA – PUNO</li>
+                        <li>64. ASOCIACIÓN CULTURAL KULLAHUADA VIRGEN MARÍA DE LA CANDELARIA</li>
+                        <li>65. ASOCIACIÓN LA VOZ CULTURAL KHANTUS 13 DE MAYO – HUAYRAPATA</li>
+                        <li>67. ASOCIACIÓN CULTURAL CAPORALES CENTRALISTAS – PUNO</li>
+                        <li>68. ASOCIACIÓN DE EXPRESIÓN CULTURAL JUVENIL 29 DE SETIEMBRE – ILAVE</li>
+                        <li>69. ASOCIACIÓN CULTURAL GENUINOS AYARACHIS DE PARATIA – LAMPA</li>
+                        <li>70. TRADICIONAL DIABLADA PORTEÑO</li>
+                        <li>71. SOCIEDAD CENTRO SOCIAL DE FOLKLORE Y CULTURA "FUNDACIÓN POKOPAKA" – HUANCANÉ</li>
+                        <li>72. AUTÉNTICOS AYARACHIS DE ANTALLA – PALCA, LAMPA</li>
+                        <li>73. ASOCIACIÓN FOLKLÓRICA TINKUS SEÑOR DE MACHALLATA</li>
+                        <li>74. CONJUNTO "REY CAPORAL INDEPENDENCIA" – PUNO</li>
+                        <li>75. ASOCIACIÓN JUVENIL CABANILLAS SIKURIS AJC</li>
+                        <li>76. ASOCIACIÓN FOLKLÓRICA "CAPORALES VICTORIA" – PUNO</li>
+                        <li>77. CONJUNTO DE ARTE Y FOLKLORE SICURIS JUVENTUD OBRERA</li>
+                        <li>78. PODEROSA ESPECTACULAR WACA WACA ALTO PUNO</li>
+                        <li>79. CONFRATERNIDAD MORENADA INTOCABLES JULIACA MIA</li>
+                        <li>80. CONJUNTO DE MÚSICOS Y DANZAS AUTÓCTONAS "WIÑAY QHANTATI" – URURI CONIMA</li>
+                        <li>81. CAPORALES CENTRO CULTURAL ANDINO</li>
+                        <li>82. CONFRATERNIDAD MORENADA SANTA ROSA – PUNO</li>
+                        <li>83. ASOCIACIÓN DE ZAMPOÑISTAS Y DANZAS AUTÓCTONAS SAN FRANCISCO DE BORJA – YUNGUYO</li>
+                        <li>84. ASOCIACIÓN CULTURAL DE SICURIS PROYECTO PARIWANAS – HUANCANÉ</li>
+                        <li>85. ASOCIACIÓN CULTURAL DIABLADA CONFRATERNIDAD HUÁSCAR</li>
+                        <li>86. CONFRATERNIDAD CENTRAL TOBAS SUR</li>
+                        <li>87. CENTRO CULTURAL SENTIMIENTO SIKURIS "LAS VICUÑAS DE LA INMACULADA" – LAMPA</li>
+                        <li>88. CENTRO CULTURAL MELODÍAS EL COLLAO – ILAVE</li>
+                        <li>89. ASOCIACIÓN FOLKLÓRICA ANDINO AMAZÓNICO TOBAS CENTRAL PERÚ</li>
+                        <li>90. ASOCIACIÓN JUVENIL PUNO SIKURIS 27 DE JUNIO (AJP)</li>
+                        <li>91. GRAN MORENADA SALCEDO</li>
+                        <li>92. MORENADA SAN MARTÍN</li>
+                        <li>93. ASOCIACIÓN CULTURAL INCOMPARABLE GRAN DIABLADA AMIGOS DE LA PNP</li>
+                        <li>94. CONJUNTO DE DANZAS ALTIPLÁNICAS DE LA UNI (TUNTUNA UNI)</li>
+                        <li>95. ASOCIACIÓN ROMEOS DE CANDELARIA</li>
+                        <li>96. CONFRATERNIDAD PODEROSA Y ESPECTACULAR MORENADA SAN VALENTÍN – ILAVE</li>
+                        <li>97. LA GRAN CONFRATERNIDAD LLAMERADA VIRGEN GRAN COLLAVIC – PUNO</li>
+                        <li><strong>Exhibición:</strong> MORENADA CENTRAL PUNO</li>
+                    </ul>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- ============================================
+                ORDEN DE PRESENTACIÓN
+                LIX CONCURSO DE DANZAS DE TRAJES DE LUCES
+                EN HONOR A LA SANTÍSIMA VIRGEN DE LA CANDELARIA – 2026
+            =============================================== -->
+            <div class="tiktok-section">
+                <h2 class="titulo-cronograma">
+                    ORDEN DE PRESENTACIÓN<br>
+                    LIX CONCURSO DE DANZAS DE TRAJES DE LUCES<br>
+                    EN HONOR A LA SANTÍSIMA VIRGEN DE LA CANDELARIA – 2026
+                </h2>
+
+                <p class="fecha" style="text-align:center; font-weight:bold;">
+                    📍 Estadio UNA – Puno<br>
+                    🗓️ Domingo 08 de febrero del 2026<br>
+                    🕖 Hora de inicio: 07:00 a.m.
+                </p>
+
+                <div class="shorts-grid">
+
+                    <!-- Día Único -->
+                    <div class="cronograma-card">
+                    <h3>ORDEN DE PRESENTACIÓN</h3>
+                    <ul class="cronograma-list">
+                        <li><strong>Exhibición:</strong> ORGANIZACIÓN CULTURAL ARMONÍA DE VIENTOS HUJ'MAYA</li>
+                        <li><strong>Exhibición:</strong> CONJUNTO DE SIKURIS GLORIOSO SAN CARLOS</li>
+
+                        <li>1. ASOCIACIÓN CULTURAL DIABLADA CONFRATERNIDAD HUÁSCAR</li>
+                        <li>2. CENTRO CULTURAL MELODÍAS EL COLLAO – ILAVE</li>
+                        <li>3. LA GRAN CONFRATERNIDAD LLAMERADA VIRGEN DE LA CANDELARIA CENTRAL PUNO – LA</li>
+                        <li>4. ASOCIACIÓN FOLKLÓRICA ANDINO AMAZÓNICO TOBAS CENTRAL PERÚ</li>
+                        <li>5. ASOCIACIÓN ROMEOS DE CANDELARIA</li>
+                        <li>6. CONJUNTO DE DANZAS ALTIPLÁNICAS DE LA UNI (TUNTUNA UNI)</li>
+                        <li>7. ASOCIACIÓN CULTURAL INCOMPARABLE GRAN DIABLADA AMIGOS DE LA PNP</li>
+                        <li>8. CENTRO CULTURAL SENTIMIENTO SIKURIS “LAS VICUÑAS DE LA INMACULADA” – LAMPA</li>
+                        <li>9. GRAN MORENADA SALCEDO</li>
+                        <li>10. CONFRATERNIDAD CENTRAL TOBAS SUR</li>
+                        <li>11. ASOCIACIÓN JUVENIL PUNO SIKURIS 27 DE JUNIO (AJP)</li>
+                        <li>12. CONFRATERNIDAD PODEROSA Y ESPECTACULAR MORENADA SAN VALENTÍN – ILAVE</li>
+                        <li>13. CONJUNTO DE ZAMPOÑAS Y DANZAS UNI</li>
+                        <li>14. CONJUNTO CLASIFICADO SALIDA DE MANCO CÁPAC Y MAMA OCLLO 2025</li>
+                        <li>15. SOCIEDAD DE EXPRESIÓN CULTURAL SIKURIS WARA WARA WAYRAS – HUATASANI</li>
+                        <li>16. ESCUELA DE ARTE “JOSÉ CARLOS MARIÁTEGUI” ZAMBOS TUNDIQUES</li>
+                        <li>17. CONFRATERNIDAD DIABLADA SAN ANTONIO</li>
+                        <li>18. ASOCIACIÓN DE EXPRESIÓN CULTURAL JUVENIL 29 DE SETIEMBRE – ILAVE</li>
+                        <li>19. CONJUNTO FOLKLÓRICO MORENADA ORKAPATA</li>
+                        <li>20. CAPORALES CENTRO CULTURAL ANDINO</li>
+                        <li>21. CONJUNTO DE MÚSICOS Y DANZAS AUTÓCTONAS “WIÑAY QHANTATI” – URURI CONIMA</li>
+                        <li>22. MORENADA HUAJSAPATA</li>
+                        <li>23. CONJUNTO FOLKLÓRICO LA LLAMERADA DEL CLUB JUVENIL ANDINO DE LAMPA</li>
+                        <li>24. AGRUPACIÓN DE SIKURIS RAÍCES AYMARAS – ILAVE “ASIKUR”</li>
+                        <li>25. ASOCIACIÓN FOLKLÓRICA DIABLADA AZOGUINI</li>
+                        <li>26. CONFRATERNIDAD MORENADA SANTA ROSA – PUNO</li>
+                        <li>27. ASOCIACIÓN FOLKLÓRICA CAPORALES SAN VALENTÍN</li>
+                        <li>28. GRUPO DE ARTE 14 DE SEPTIEMBRE – MOHO</li>
+                        <li>29. CONJUNTO DE ARTE Y FOLKLORE SICURIS JUVENTUD OBRERA</li>
+                        <li>30. MORENADA CENTRAL GALENO – DR. RICARDO J. RUELAS RODRÍGUEZ</li>
+                        <li>31. ASOCIACIÓN CULTURAL CAPORALES “SAMBOS CON SENTIMIENTO Y DEVOCIÓN” – PORTEÑO</li>
+                        <li>32. REY MORENO LAYKAKOTA</li>
+                        <li>33. ASOCIACIÓN CULTURAL SANGRE INDOMABLE – AZÁNGARO</li>
+                        <li>34. PODEROSA ESPECTACULAR WACA WACA ALTO PUNO</li>
+                        <li>35. COFRADÍA DE NEGRITOS CHACÓN BEATERIO DE HUÁNUCO</li>
+                        <li>36. MORENADA VIRGEN DE LA CANDELARIA – MANDACHITOS</li>
+                        <li>37. EXPRESIÓN CULTURAL MILENARIOS DE SIKURIS INTERNACIONAL LOS ROSALES – HUANCANÉ</li>
+                        <li>38. ASOCIACIÓN LA VOZ CULTURAL KHANTUS 13 DE MAYO – HUAYRAPATA</li>
+                        <li>39. ESCUELA INTERNACIONAL DEL FOLKLORE CAPORALES DEL SUR – PUNO</li>
+                        <li>40. ASOCIACIÓN CULTURAL KULLAHUADA VIRGEN MARÍA DE LA CANDELARIA</li>
+                        <li>41. WACA WACA DEL BARRIO PORTEÑO</li>
+                        <li>42. ASOCIACIÓN FOLKLÓRICA “CAPORALES VICTORIA” – PUNO</li>
+                        <li>43. ASOCIACIÓN DE ZAMPOÑISTAS Y DANZAS AUTÓCTONAS SAN FRANCISCO DE BORJA – YUNGUYO</li>
+                        <li>44. AGRUPACIÓN CULTURAL MILENARIA DE SIKURIS INTERNACIONAL HUARIHUMA – HUANCANÉ</li>
+                        <li>45. CONJUNTO CLASIFICADO SALIDA DE MANCO CÁPAC Y MAMA OCLLO 2025</li>
+                        <li>46. TRADICIONAL DIABLADA PORTEÑO</li>
+                        <li>47. TRADICIONAL REY MORENO SAN ANTONIO</li>
+                        <li><strong>Invitado:</strong> WIFALAS SAN FRANCISCO JAVIER DE MUÑANI (Campeón en Danzas Originarias 2025)</li>
+                        <li>48. CONFRATERNIDAD CULTURAL WACAS – PUNO</li>
+                        <li>49. ASOCIACIÓN MORENADA PORTEÑO</li>
+                        <li>50. AGRUPACIÓN SOCIEDAD CULTURAL AUTÓCTONO SIKURIS WILA MARCA – CONIMA</li>
+                        <li>51. ASOCIACIÓN FOLKLÓRICA TINKUS SEÑOR DE MACHALLATA</li>
+                        <li>52. ASOCIACIÓN CULTURAL ZAMPOÑISTAS LACUSTRE DEL BARRIO JOSÉ ANTONIO ENCINAS</li>
+                        <li>53. ASOCIACIÓN CULTURAL CAPORALES CENTRALISTAS – PUNO</li>
+                        <li>54. AUTÉNTICOS AYARACHIS TAWANTIN AYLLU – CUYO CUYO, SANDIA</li>
+                        <li>55. ASOCIACIÓN FOLKLÓRICA ESPECTACULAR DIABLADA BELLAVISTA</li>
+                        <li>56. SOCIEDAD CENTRO SOCIAL DE FOLKLORE Y CULTURA “FUNDACIÓN POKOPAKA” – HUANCANÉ</li>
+                        <li>57. AGRUPACIÓN KULLAHUADA VICTORIA</li>
+                        <li>58. ASOCIACIÓN CULTURAL DE SIKURIS INTERCONTINENTALES AYMARAS DE HUANCANÉ</li>
+                        <li>59. ASOCIACIÓN CULTURAL ECOLÓGICA ETNIAS AMAZÓNICAS DEL PERÚ – BIODANZA</li>
+                        <li>60. ASOCIACIÓN DE ARTE, CULTURA Y FOLKLORE CAPORALES DE SIEMPRE – PITONES</li>
+                        <li>61. CONFRATERNIDAD MORENADA INTOCABLES JULIACA MIA</li>
+                        <li>62. ASOCIACIÓN CULTURAL DE SIKURIS LOS AYMARAS DE HUANCANÉ</li>
+                        <li>63. CONJUNTO DE ZAMPOÑAS “EXPRESIÓN CULTURAL” – OCOÑA, ILAVE</li>
+                        <li>64. CONJUNTO “REY CAPORAL INDEPENDENCIA” – PUNO</li>
+                        <li>65. ASOCIACIÓN FOLKLÓRICA WACA WACA SANTA ROSA</li>
+                        <li>66. ASOCIACIÓN CULTURAL FOLKLÓRICA CAPORALES HUÁSCAR</li>
+                        <li>67. MORENADA LAYKAKOTA</li>
+                        <li>68. CONJUNTO FOLKLÓRICO LOS CAPORALES DE LA TUNTUNA – MIRAFLORES, PUNO</li>
+                        <li>69. AGRUPACIÓN SANGRE CHUMBIVILCANA – DANZA HUAYLIA CHUMBIVILCANA – CUSCO</li>
+                        <li>70. FRATERNIDAD ARTÍSTICA SAMBOS CAPORALES SEÑOR DE QOILLOR-RITTY</li>
+                        <li>71. CONJUNTO SIKURIS 15 DE MAYO DE CAMBRIA – CONIMA</li>
+                        <li>72. DIABLADA CONFRATERNIDAD VICTORIA</li>
+                        <li>73. AGRUPACIÓN DE ZAMPOÑISTAS DEL ALTIPLANO DEL BARRIO HUAJSAPATA – PUNO</li>
+                        <li>74. ASOCIACIÓN CULTURAL FOLKLÓRICA “LEGADO CAPORAL”</li>
+                        <li>75. AUTÉNTICOS AYARACHIS DE ANTALLA – PALCA, LAMPA</li>
+                        <li>76. ASOCIACIÓN CULTURAL FOLKLÓRICA TOBAS AMAZONAS ANATA</li>
+                        <li>77. ASOCIACIÓN CULTURAL “MORENADA AZOGUINI”</li>
+                        <li>78. CENTRO SOCIAL KULLAHUADA CENTRAL – PUNO</li>
+                        <li>79. ASOCIACIÓN DE ARTE Y FOLKLORE CAPORALES SAN JUAN BAUTISTA – PUNO</li>
+                        <li>80. CENTENARIO CONJUNTO SIKURIS DEL BARRIO MAÑAZO</li>
+                        <li>81. AGRUPACIÓN CULTURAL SIKURIS “CLAVELES ROJOS” – HUANCANÉ</li>
+                        <li>82. FRATERNIDAD CAPORALES VIRGEN DE LA CANDELARIA “VIENTOS DEL SUR”</li>
+                        <li>83. PODEROSA Y ESPECTACULAR MORENADAS BELLAVISTA</li>
+                        <li>84. ASOCIACIÓN CULTURAL DE SIKURIS PROYECTO PARIWANAS – HUANCANÉ</li>
+                        <li>85. ASOCIACIÓN CULTURAL GENUINOS AYARACHIS DE PARATIA – LAMPA</li>
+                        <li>86. CONJUNTO DE ZAMPOÑISTAS JUVENTUD PAXA “JUPAX”</li>
+                        <li>87. CONJUNTO MORENADA “RICARDO PALMA”</li>
+                        <li>88. ASOCIACIÓN JUVENIL CABANILLAS SIKURIS AJC</li>
+                        <li>89. ASOCIACIÓN FOLKLÓRICA DIABLADA “CENTINELAS DEL ALTIPLANO”</li>
+                        <li>90. ASOCIACIÓN FOLKLÓRICA VIRGEN DE LA CANDELARIA – AFOVIC</li>
+                        <li>91. FABULOSA MORENADA INDEPENDENCIA</li>
+                        <li>92. TALLER DE ARTE, MÚSICA Y DANZA “REAL ASUNCIÓN” – JULI</li>
+                        <li>93. JUVENTUD TINKUS DEL BARRIO PORTEÑO</li>
+                        <li>94. CONJUNTO DE DANZAS Y MÚSICA AUTÓCTONA QHANTATI URURI DE CONIMA</li>
+                        <li>95. CENTRO UNIVERSITARIO DE FOLKLORE Y CONJUNTO DE ZAMPOÑAS – UNMSM (CZSM)</li>
+                        <li><strong>Exhibición:</strong> ASOCIACIÓN CULTURAL CAPORALES MI VIEJO SJ</li>
+                        <li><strong>Exhibición:</strong> MORENADA CENTRAL PUNO</li>
+                    </ul>
                     </div>
                 </div>
             </div>
-        </div>
+        </div> <!-- /Columna central -->
 
         <!-- Columna derecha -->
         <div class="right-column">
@@ -240,13 +412,15 @@
                 <!-- Imagen -->
                 <img src="../../publicidad/sikuris.jpg" alt="sikuris" class="publi-img">
 
+                <!-- Segundo video -->
                 <video controls autoplay muted loop>
-                    <source src="../../publicidad/sikuris1.1.mp4" alt="sikuris video" type="video/mp4">
-                    tu navegador no soporta el formato del video
+                    <source src="../../publicidad/sikuris1.1.mp4" type="video/mp4">
+                    Tu navegador no soporta el formato del video.
                 </video>
             </div>
-        </div>
-    </div>
+        </div> <!-- /Columna derecha -->
+
+    </div> <!-- /main-container -->
 
     <!-- Pie de página -->
     <div class="footer">
@@ -308,6 +482,31 @@
     toggle.addEventListener("click", () => {
         navLinks.classList.toggle("active");
     });
+    });
+    </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.getElementById("imgModal");
+        const modalImg = document.getElementById("modalImg");
+        const captionText = document.getElementById("caption");
+        const contenidoText = document.getElementById("contenido");
+
+        // Detectar clicks en las imágenes de noticias
+        document.querySelectorAll(".noticia-item img").forEach(img => {
+            img.addEventListener("click", () => {
+                modal.style.display = "flex"; // usa flex para centrar
+                modalImg.src = img.src;
+                captionText.innerText = img.alt; // título
+                contenidoText.innerText = img.dataset.contenido; // contenido
+            });
+        });
+
+        // Cerrar al hacer clic en cualquier parte del fondo
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) { 
+                modal.style.display = "none";
+            }
+        });
     });
     </script>
 </body>
